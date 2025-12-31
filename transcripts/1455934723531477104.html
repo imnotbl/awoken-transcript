@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Transcript – h-info-287679</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #0f172a 0%, #1a1f2e 50%, #0f1419 100%);
+    color: #e5e7eb;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    min-height: 100vh;
+}
+
+header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    padding: 24px 16px;
+    background: rgba(2, 6, 23, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 2px solid #1e293b;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    animation: slideDown 0.6s ease-out;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+header h1 {
+    margin: 0 0 8px 0;
+    font-size: 28px;
+    background: linear-gradient(135deg, #60a5fa 0%, #7c3aed 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+header .header-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+header small {
+    color: #94a3b8;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.msg-count {
+    background: linear-gradient(135deg, #0f766e 0%, #0e7490 100%);
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #5eead4;
+    border: 1px solid #155e75;
+}
+
+main {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 32px 16px;
+}
+
+.messages-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.msg {
+    display: flex;
+    gap: 14px;
+    background: linear-gradient(135deg, rgba(30, 41, 59, 0.4) 0%, rgba(15, 23, 42, 0.3) 100%);
+    border: 1px solid rgba(148, 163, 184, 0.15);
+    border-radius: 14px;
+    padding: 16px;
+    animation: fadeInUp 0.5s ease-out both;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.msg::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transition: left 0.5s;
+}
+
+.msg:hover {
+    border-color: rgba(96, 165, 250, 0.3);
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(99, 102, 241, 0.05) 100%);
+    transform: translateX(4px);
+    box-shadow: 0 8px 24px rgba(59, 130, 246, 0.15);
+}
+
+.msg:hover::before {
+    left: 100%;
+}
+
+.avatar-wrapper {
+    position: relative;
+    flex-shrink: 0;
+}
+
+.avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    border: 2px solid #1e293b;
+    transition: all 0.3s ease;
+    object-fit: cover;
+}
+
+.avatar-badge {
+    position: absolute;
+    bottom: -2px;
+    right: -2px;
+    width: 14px;
+    height: 14px;
+    background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+    border: 2px solid #0f172a;
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7);
+    }
+    50% {
+        box-shadow: 0 0 0 6px rgba(34, 197, 94, 0);
+    }
+}
+
+.msg:hover .avatar {
+    transform: scale(1.1) rotate(-5deg);
+    border-color: #60a5fa;
+}
+
+.content-wrapper {
+    flex: 1;
+    min-width: 0;
+}
+
+.msg-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 8px;
+    flex-wrap: wrap;
+}
+
+.author {
+    font-weight: 600;
+    font-size: 14px;
+    background: linear-gradient(135deg, #60a5fa 0%, #7c3aed 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.time {
+    color: #64748b;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.text {
+    color: #e5e7eb;
+    line-height: 1.6;
+    word-break: break-word;
+    white-space: pre-wrap;
+    font-size: 14px;
+    margin: 0;
+}
+
+.attach {
+    margin-top: 10px;
+    padding: 8px 12px;
+    background: linear-gradient(135deg, rgba(34, 197, 94, 0.1) 0%, rgba(34, 197, 94, 0.05) 100%);
+    border-left: 3px solid #22c55e;
+    border-radius: 6px;
+    font-size: 12px;
+}
+
+.attach a {
+    color: #4ade80;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.attach a:hover {
+    color: #86efac;
+    text-decoration: underline;
+}
+
+.embed-note {
+    margin-top: 10px;
+    padding: 8px 12px;
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(99, 102, 241, 0.05) 100%);
+    border-left: 3px solid #6366f1;
+    border-radius: 6px;
+    font-size: 12px;
+    color: #a5b4fc;
+    font-weight: 500;
+}
+
+footer {
+    text-align: center;
+    padding: 32px 16px;
+    color: #64748b;
+    font-size: 12px;
+    border-top: 1px solid #1e293b;
+    margin-top: 48px;
+}
+
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 22px;
+    }
+
+    header .header-info {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .msg {
+        padding: 12px;
+        gap: 10px;
+    }
+
+    .avatar {
+        width: 40px;
+        height: 40px;
+    }
+
+    main {
+        padding: 16px 12px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation: none !important;
+        transition: none !important;
+    }
+}
+</style>
+</head>
+
+<body>
+<header>
+    <h1>🎫 #h-info-287679</h1>
+    <div class="header-info">
+        <small>📅 31.12.2025, 15:02:56</small>
+        <div class="msg-count">📨 44 mesaje</div>
+    </div>
+</header>
+
+<main>
+    <div class="messages-container">
+        <div class="msg" style="animation-delay: 0s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1455229229775065361/1770dec7ae8ababda528b9708f6fa056.webp?size=128" alt="dr1p-new#5884" title="dr1p-new#5884">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">dr1p-new#5884</span>
+            <span class="time">🕐 31.12.2025, 14:44:48</span>
+        </div>
+        <div class="text">&lt;@&amp;1447415113484210226&gt; &lt;@1234595539635404862&gt;</div><div class="embed-note">📊 Embed inclus (1)</div></div></div><div class="msg" style="animation-delay: 0.05s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1234595539635404862/ac14dd4fd096f89fa558d4adc4595d93.webp?size=128" alt="baftacoaie_" title="baftacoaie_">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">baftacoaie_</span>
+            <span class="time">🕐 31.12.2025, 14:45:02</span>
+        </div>
+        <div class="text">Ba fram care e developeru botului</div></div></div><div class="msg" style="animation-delay: 0.1s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1059489835825508472/a_ccd184da898b349db10d8233b34c0fd2.gif?size=128" alt="rvrremove" title="rvrremove">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">rvrremove</span>
+            <span class="time">🕐 31.12.2025, 14:45:12</span>
+        </div>
+        <div class="text">&lt;@1295796421957517405&gt; &lt;@923205829166006272&gt;</div></div></div><div class="msg" style="animation-delay: 0.15000000000000002s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1234595539635404862/ac14dd4fd096f89fa558d4adc4595d93.webp?size=128" alt="baftacoaie_" title="baftacoaie_">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">baftacoaie_</span>
+            <span class="time">🕐 31.12.2025, 14:46:07</span>
+        </div>
+        <div class="text">Ba vere e un bot de nota 1000 sa bag pl nu cred ca mai sunt alti developeri buni ca ei</div></div></div><div class="msg" style="animation-delay: 0.2s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1234595539635404862/ac14dd4fd096f89fa558d4adc4595d93.webp?size=128" alt="baftacoaie_" title="baftacoaie_">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">baftacoaie_</span>
+            <span class="time">🕐 31.12.2025, 14:47:01</span>
+        </div>
+        <div class="text">Au &lt;@1059489835825508472&gt; imi zici si mie cum ajung co own sau cv pe sv asta eu am mai fost staff si pe sv Hall Of Fame</div></div></div><div class="msg" style="animation-delay: 0.25s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1455229229775065361/1770dec7ae8ababda528b9708f6fa056.webp?size=128" alt="dr1p-new#5884" title="dr1p-new#5884">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">dr1p-new#5884</span>
+            <span class="time">🕐 31.12.2025, 14:47:15</span>
+        </div>
+        <div class="text"><em>Mesaj gol</em></div><div class="embed-note">📊 Embed inclus (1)</div></div></div><div class="msg" style="animation-delay: 0.30000000000000004s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1305885692567490622/00a7e35b376dc9f496fdfe93b010f29f.webp?size=128" alt="nixoo77" title="nixoo77">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">nixoo77</span>
+            <span class="time">🕐 31.12.2025, 14:47:46</span>
+        </div>
+        <div class="text">Ce grad ai avut?</div></div></div><div class="msg" style="animation-delay: 0.35000000000000003s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1234595539635404862/ac14dd4fd096f89fa558d4adc4595d93.webp?size=128" alt="baftacoaie_" title="baftacoaie_">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">baftacoaie_</span>
+            <span class="time">🕐 31.12.2025, 14:47:56</span>
+        </div>
+        <div class="text">Ass manager</div></div></div><div class="msg" style="animation-delay: 0.4s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1305885692567490622/00a7e35b376dc9f496fdfe93b010f29f.webp?size=128" alt="nixoo77" title="nixoo77">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">nixoo77</span>
+            <span class="time">🕐 31.12.2025, 14:48:26</span>
+        </div>
+        <div class="text">O sa intri cu un grad mai mic</div></div></div><div class="msg" style="animation-delay: 0.45s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1234595539635404862/ac14dd4fd096f89fa558d4adc4595d93.webp?size=128" alt="baftacoaie_" title="baftacoaie_">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">baftacoaie_</span>
+            <span class="time">🕐 31.12.2025, 14:48:46</span>
+        </div>
+        <div class="text">Adk supervizor?</div></div></div><div class="msg" style="animation-delay: 0.5s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1305885692567490622/00a7e35b376dc9f496fdfe93b010f29f.webp?size=128" alt="nixoo77" title="nixoo77">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">nixoo77</span>
+            <span class="time">🕐 31.12.2025, 14:49:03</span>
+        </div>
+        <div class="text">Dar poți face o lista cu ce &quot;benefici&quot; poți sa faci și de ce poți ocupa</div></div></div><div class="msg" style="animation-delay: 0.55s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1305885692567490622/00a7e35b376dc9f496fdfe93b010f29f.webp?size=128" alt="nixoo77" title="nixoo77">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">nixoo77</span>
+            <span class="time">🕐 31.12.2025, 14:49:12</span>
+        </div>
+        <div class="text">Da</div></div></div><div class="msg" style="animation-delay: 0.6000000000000001s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1234595539635404862/ac14dd4fd096f89fa558d4adc4595d93.webp?size=128" alt="baftacoaie_" title="baftacoaie_">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">baftacoaie_</span>
+            <span class="time">🕐 31.12.2025, 14:49:20</span>
+        </div>
+        <div class="text">Pai si lu cn dau mesaj</div></div></div><div class="msg" style="animation-delay: 0.65s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1234595539635404862/ac14dd4fd096f89fa558d4adc4595d93.webp?size=128" alt="baftacoaie_" title="baftacoaie_">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">baftacoaie_</span>
+            <span class="time">🕐 31.12.2025, 14:49:23</span>
+        </div>
+        <div class="text">?</div></div></div><div class="msg" style="animation-delay: 0.7000000000000001s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/906940274490630195/a_9f22709d305ee30c719f07a9b04efa86.gif?size=128" alt="papy_27" title="papy_27">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">papy_27</span>
+            <span class="time">🕐 31.12.2025, 14:50:00</span>
+        </div>
+        <div class="text">&lt;#1448867728453533782&gt;</div></div></div><div class="msg" style="animation-delay: 0.75s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1305885692567490622/00a7e35b376dc9f496fdfe93b010f29f.webp?size=128" alt="nixoo77" title="nixoo77">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">nixoo77</span>
+            <span class="time">🕐 31.12.2025, 14:50:05</span>
+        </div>
+        <div class="text">Poți sa o faci aici și ma duc și propun</div></div></div><div class="msg" style="animation-delay: 0.8s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1234595539635404862/ac14dd4fd096f89fa558d4adc4595d93.webp?size=128" alt="baftacoaie_" title="baftacoaie_">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">baftacoaie_</span>
+            <span class="time">🕐 31.12.2025, 14:50:50</span>
+        </div>
+        <div class="text">&lt;@1234595539635404862&gt;</div></div></div><div class="msg" style="animation-delay: 0.8500000000000001s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1305885692567490622/00a7e35b376dc9f496fdfe93b010f29f.webp?size=128" alt="nixoo77" title="nixoo77">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">nixoo77</span>
+            <span class="time">🕐 31.12.2025, 14:52:04</span>
+        </div>
+        <div class="text">Pe sv asta ai avut cerere de remove</div><div class="attach"><a href="https://cdn.discordapp.com/attachments/1455934723531477104/1455936554949148754/Screenshot_20251231_165036_Discord.jpg?ex=69568a14&is=69553894&hm=673f6a564be43d70431c85619277d62bf49b5245f9e3c0ec14484f208960d473&" target="_blank">📎 Screenshot_20251231_165036_Discord.jpg</a></div></div></div><div class="msg" style="animation-delay: 0.9s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1234595539635404862/ac14dd4fd096f89fa558d4adc4595d93.webp?size=128" alt="baftacoaie_" title="baftacoaie_">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">baftacoaie_</span>
+            <span class="time">🕐 31.12.2025, 14:52:48</span>
+        </div>
+        <div class="text">Da aici</div></div></div><div class="msg" style="animation-delay: 0.9500000000000001s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1305885692567490622/00a7e35b376dc9f496fdfe93b010f29f.webp?size=128" alt="nixoo77" title="nixoo77">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">nixoo77</span>
+            <span class="time">🕐 31.12.2025, 14:52:54</span>
+        </div>
+        <div class="text">Da</div></div></div><div class="msg" style="animation-delay: 1s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1234595539635404862/ac14dd4fd096f89fa558d4adc4595d93.webp?size=128" alt="baftacoaie_" title="baftacoaie_">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">baftacoaie_</span>
+            <span class="time">🕐 31.12.2025, 14:53:06</span>
+        </div>
+        <div class="text">Am facut cerere daia</div></div></div><div class="msg" style="animation-delay: 1.05s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1305885692567490622/00a7e35b376dc9f496fdfe93b010f29f.webp?size=128" alt="nixoo77" title="nixoo77">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">nixoo77</span>
+            <span class="time">🕐 31.12.2025, 14:53:38</span>
+        </div>
+        <div class="text">Nu era neapărat</div></div></div><div class="msg" style="animation-delay: 1.1s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1305885692567490622/00a7e35b376dc9f496fdfe93b010f29f.webp?size=128" alt="nixoo77" title="nixoo77">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">nixoo77</span>
+            <span class="time">🕐 31.12.2025, 14:53:53</span>
+        </div>
+        <div class="text">Ca acu vb cu cnv</div></div></div><div class="msg" style="animation-delay: 1.1500000000000001s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1305885692567490622/00a7e35b376dc9f496fdfe93b010f29f.webp?size=128" alt="nixoo77" title="nixoo77">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">nixoo77</span>
+            <span class="time">🕐 31.12.2025, 14:54:22</span>
+        </div>
+        <div class="text">&lt;@1234595539635404862&gt;  cn te a băgat în staff</div></div></div><div class="msg" style="animation-delay: 1.2000000000000002s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1234595539635404862/ac14dd4fd096f89fa558d4adc4595d93.webp?size=128" alt="baftacoaie_" title="baftacoaie_">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">baftacoaie_</span>
+            <span class="time">🕐 31.12.2025, 14:54:55</span>
+        </div>
+        <div class="text">Flavius ca a stiut ca am fost si pe hall of fame</div></div></div><div class="msg" style="animation-delay: 1.25s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1234595539635404862/ac14dd4fd096f89fa558d4adc4595d93.webp?size=128" alt="baftacoaie_" title="baftacoaie_">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">baftacoaie_</span>
+            <span class="time">🕐 31.12.2025, 14:55:14</span>
+        </div>
+        <div class="text">Si am facut trb buna</div></div></div><div class="msg" style="animation-delay: 1.3s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1305885692567490622/00a7e35b376dc9f496fdfe93b010f29f.webp?size=128" alt="nixoo77" title="nixoo77">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">nixoo77</span>
+            <span class="time">🕐 31.12.2025, 14:55:38</span>
+        </div>
+        <div class="text">Bine și o sa fii activa p vc/chat</div></div></div><div class="msg" style="animation-delay: 1.35s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1234595539635404862/ac14dd4fd096f89fa558d4adc4595d93.webp?size=128" alt="baftacoaie_" title="baftacoaie_">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">baftacoaie_</span>
+            <span class="time">🕐 31.12.2025, 14:55:56</span>
+        </div>
+        <div class="text">Vc</div></div></div><div class="msg" style="animation-delay: 1.4000000000000001s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1234595539635404862/ac14dd4fd096f89fa558d4adc4595d93.webp?size=128" alt="baftacoaie_" title="baftacoaie_">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">baftacoaie_</span>
+            <span class="time">🕐 31.12.2025, 14:55:59</span>
+        </div>
+        <div class="text">Activ*</div></div></div><div class="msg" style="animation-delay: 1.4500000000000002s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1305885692567490622/00a7e35b376dc9f496fdfe93b010f29f.webp?size=128" alt="nixoo77" title="nixoo77">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">nixoo77</span>
+            <span class="time">🕐 31.12.2025, 14:56:24</span>
+        </div>
+        <div class="text">Ok am înțeles  o sa vorbesc</div></div></div><div class="msg" style="animation-delay: 1.5s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1305885692567490622/00a7e35b376dc9f496fdfe93b010f29f.webp?size=128" alt="nixoo77" title="nixoo77">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">nixoo77</span>
+            <span class="time">🕐 31.12.2025, 14:56:34</span>
+        </div>
+        <div class="text">Trb sa aștepți puțin</div></div></div><div class="msg" style="animation-delay: 1.55s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1234595539635404862/ac14dd4fd096f89fa558d4adc4595d93.webp?size=128" alt="baftacoaie_" title="baftacoaie_">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">baftacoaie_</span>
+            <span class="time">🕐 31.12.2025, 14:56:41</span>
+        </div>
+        <div class="text">Da</div></div></div><div class="msg" style="animation-delay: 1.6s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1059489835825508472/a_ccd184da898b349db10d8233b34c0fd2.gif?size=128" alt="rvrremove" title="rvrremove">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">rvrremove</span>
+            <span class="time">🕐 31.12.2025, 15:00:59</span>
+        </div>
+        <div class="text">&lt;@1234595539635404862&gt;</div></div></div><div class="msg" style="animation-delay: 1.6500000000000001s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1059489835825508472/a_ccd184da898b349db10d8233b34c0fd2.gif?size=128" alt="rvrremove" title="rvrremove">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">rvrremove</span>
+            <span class="time">🕐 31.12.2025, 15:01:06</span>
+        </div>
+        <div class="text"><em>Mesaj gol</em></div><div class="attach"><a href="https://cdn.discordapp.com/attachments/1455934723531477104/1455938824940028039/image.png?ex=69568c31&is=69553ab1&hm=a8fface9bed90b5247345784776901ce13696ff0fac4464338e097eee58d1b9a&" target="_blank">📎 image.png</a></div></div></div><div class="msg" style="animation-delay: 1.7000000000000002s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1059489835825508472/a_ccd184da898b349db10d8233b34c0fd2.gif?size=128" alt="rvrremove" title="rvrremove">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">rvrremove</span>
+            <span class="time">🕐 31.12.2025, 15:01:14</span>
+        </div>
+        <div class="text">sa alegi un sv te rog</div></div></div><div class="msg" style="animation-delay: 1.75s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1059489835825508472/a_ccd184da898b349db10d8233b34c0fd2.gif?size=128" alt="rvrremove" title="rvrremove">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">rvrremove</span>
+            <span class="time">🕐 31.12.2025, 15:01:22</span>
+        </div>
+        <div class="text">ori ice ori Dr1p</div></div></div><div class="msg" style="animation-delay: 1.8s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1234595539635404862/ac14dd4fd096f89fa558d4adc4595d93.webp?size=128" alt="baftacoaie_" title="baftacoaie_">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">baftacoaie_</span>
+            <span class="time">🕐 31.12.2025, 15:01:56</span>
+        </div>
+        <div class="text">Am facut la misto cererea sa vad daca reintru cu un grad mai mic cum a zis baiatu asta</div></div></div><div class="msg" style="animation-delay: 1.85s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1059489835825508472/a_ccd184da898b349db10d8233b34c0fd2.gif?size=128" alt="rvrremove" title="rvrremove">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">rvrremove</span>
+            <span class="time">🕐 31.12.2025, 15:02:16</span>
+        </div>
+        <div class="text">mda</div></div></div><div class="msg" style="animation-delay: 1.9000000000000001s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1305885692567490622/00a7e35b376dc9f496fdfe93b010f29f.webp?size=128" alt="nixoo77" title="nixoo77">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">nixoo77</span>
+            <span class="time">🕐 31.12.2025, 15:02:24</span>
+        </div>
+        <div class="text">Sunt fata 1 la mana</div></div></div><div class="msg" style="animation-delay: 1.9500000000000002s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1059489835825508472/a_ccd184da898b349db10d8233b34c0fd2.gif?size=128" alt="rvrremove" title="rvrremove">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">rvrremove</span>
+            <span class="time">🕐 31.12.2025, 15:02:26</span>
+        </div>
+        <div class="text">mersi de timpul pierdut</div></div></div><div class="msg" style="animation-delay: 2s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/906940274490630195/a_9f22709d305ee30c719f07a9b04efa86.gif?size=128" alt="papy_27" title="papy_27">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">papy_27</span>
+            <span class="time">🕐 31.12.2025, 15:02:34</span>
+        </div>
+        <div class="text">cls</div></div></div><div class="msg" style="animation-delay: 2.0500000000000003s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1059489835825508472/a_ccd184da898b349db10d8233b34c0fd2.gif?size=128" alt="rvrremove" title="rvrremove">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">rvrremove</span>
+            <span class="time">🕐 31.12.2025, 15:02:38</span>
+        </div>
+        <div class="text">te rog sa nu ne mai pierzi timpul inchide direct ticketul</div></div></div><div class="msg" style="animation-delay: 2.1s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1305885692567490622/00a7e35b376dc9f496fdfe93b010f29f.webp?size=128" alt="nixoo77" title="nixoo77">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">nixoo77</span>
+            <span class="time">🕐 31.12.2025, 15:02:43</span>
+        </div>
+        <div class="text">2 la mana nu mai fa chesti la misto</div></div></div><div class="msg" style="animation-delay: 2.15s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1455229229775065361/1770dec7ae8ababda528b9708f6fa056.webp?size=128" alt="dr1p-new#5884" title="dr1p-new#5884">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">dr1p-new#5884</span>
+            <span class="time">🕐 31.12.2025, 15:02:50</span>
+        </div>
+        <div class="text"><em>Mesaj gol</em></div><div class="embed-note">📊 Embed inclus (1)</div></div></div>
+    </div>
+</main>
+
+<footer>
+    <p>Transcript generat automat de DR1P Bot • Sistem de Tickete</p>
+</footer>
+
+</body>
+</html>
