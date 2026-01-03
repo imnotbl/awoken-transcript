@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Transcript – rs-197249</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #0f172a 0%, #1a1f2e 50%, #0f1419 100%);
+    color: #e5e7eb;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    min-height: 100vh;
+}
+
+header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    padding: 24px 16px;
+    background: rgba(2, 6, 23, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 2px solid #1e293b;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    animation: slideDown 0.6s ease-out;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+header h1 {
+    margin: 0 0 8px 0;
+    font-size: 28px;
+    background: linear-gradient(135deg, #60a5fa 0%, #7c3aed 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+header .header-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+header small {
+    color: #94a3b8;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.msg-count {
+    background: linear-gradient(135deg, #0f766e 0%, #0e7490 100%);
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #5eead4;
+    border: 1px solid #155e75;
+}
+
+main {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 32px 16px;
+}
+
+.messages-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.msg {
+    display: flex;
+    gap: 14px;
+    background: linear-gradient(135deg, rgba(30, 41, 59, 0.4) 0%, rgba(15, 23, 42, 0.3) 100%);
+    border: 1px solid rgba(148, 163, 184, 0.15);
+    border-radius: 14px;
+    padding: 16px;
+    animation: fadeInUp 0.5s ease-out both;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.msg::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transition: left 0.5s;
+}
+
+.msg:hover {
+    border-color: rgba(96, 165, 250, 0.3);
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(99, 102, 241, 0.05) 100%);
+    transform: translateX(4px);
+    box-shadow: 0 8px 24px rgba(59, 130, 246, 0.15);
+}
+
+.msg:hover::before {
+    left: 100%;
+}
+
+.avatar-wrapper {
+    position: relative;
+    flex-shrink: 0;
+}
+
+.avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    border: 2px solid #1e293b;
+    transition: all 0.3s ease;
+    object-fit: cover;
+}
+
+.avatar-badge {
+    position: absolute;
+    bottom: -2px;
+    right: -2px;
+    width: 14px;
+    height: 14px;
+    background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+    border: 2px solid #0f172a;
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7);
+    }
+    50% {
+        box-shadow: 0 0 0 6px rgba(34, 197, 94, 0);
+    }
+}
+
+.msg:hover .avatar {
+    transform: scale(1.1) rotate(-5deg);
+    border-color: #60a5fa;
+}
+
+.content-wrapper {
+    flex: 1;
+    min-width: 0;
+}
+
+.msg-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 8px;
+    flex-wrap: wrap;
+}
+
+.author {
+    font-weight: 600;
+    font-size: 14px;
+    background: linear-gradient(135deg, #60a5fa 0%, #7c3aed 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.time {
+    color: #64748b;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.text {
+    color: #e5e7eb;
+    line-height: 1.6;
+    word-break: break-word;
+    white-space: pre-wrap;
+    font-size: 14px;
+    margin: 0;
+}
+
+.attach {
+    margin-top: 10px;
+    padding: 8px 12px;
+    background: linear-gradient(135deg, rgba(34, 197, 94, 0.1) 0%, rgba(34, 197, 94, 0.05) 100%);
+    border-left: 3px solid #22c55e;
+    border-radius: 6px;
+    font-size: 12px;
+}
+
+.attach a {
+    color: #4ade80;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.attach a:hover {
+    color: #86efac;
+    text-decoration: underline;
+}
+
+.embed-note {
+    margin-top: 10px;
+    padding: 8px 12px;
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(99, 102, 241, 0.05) 100%);
+    border-left: 3px solid #6366f1;
+    border-radius: 6px;
+    font-size: 12px;
+    color: #a5b4fc;
+    font-weight: 500;
+}
+
+footer {
+    text-align: center;
+    padding: 32px 16px;
+    color: #64748b;
+    font-size: 12px;
+    border-top: 1px solid #1e293b;
+    margin-top: 48px;
+}
+
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 22px;
+    }
+
+    header .header-info {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .msg {
+        padding: 12px;
+        gap: 10px;
+    }
+
+    .avatar {
+        width: 40px;
+        height: 40px;
+    }
+
+    main {
+        padding: 16px 12px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation: none !important;
+        transition: none !important;
+    }
+}
+</style>
+</head>
+
+<body>
+<header>
+    <h1>🎫 #rs-197249</h1>
+    <div class="header-info">
+        <small>📅 03.01.2026, 21:28:25</small>
+        <div class="msg-count">📨 63 mesaje</div>
+    </div>
+</header>
+
+<main>
+    <div class="messages-container">
+        <div class="msg" style="animation-delay: 0s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1455229229775065361/a_07b088393f9e5f661d5637dd10c60271.gif?size=128" alt="dr1p-new#5884" title="dr1p-new#5884">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">dr1p-new#5884</span>
+            <span class="time">🕐 03.01.2026, 21:19:58</span>
+        </div>
+        <div class="text">&lt;@&amp;1447415103283662898&gt; &lt;@&amp;1447415102092345467&gt; &lt;@&amp;1447415099353600152&gt; &lt;@&amp;1447370749299130524&gt; &lt;@812319405480345623&gt;</div><div class="embed-note">📊 Embed inclus (1)</div></div></div><div class="msg" style="animation-delay: 0.05s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1455229229775065361/a_07b088393f9e5f661d5637dd10c60271.gif?size=128" alt="dr1p-new#5884" title="dr1p-new#5884">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">dr1p-new#5884</span>
+            <span class="time">🕐 03.01.2026, 21:20:05</span>
+        </div>
+        <div class="text"><em>Mesaj gol</em></div><div class="embed-note">📊 Embed inclus (1)</div></div></div><div class="msg" style="animation-delay: 0.1s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/812319405480345623/6b433fca8a897bf4e1792ad667549cc5.webp?size=128" alt="_.antarctic_" title="_.antarctic_">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">_.antarctic_</span>
+            <span class="time">🕐 03.01.2026, 21:20:09</span>
+        </div>
+        <div class="text">sall</div></div></div><div class="msg" style="animation-delay: 0.15000000000000002s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1448628682263494666/79cf396c817b117a4e6e5c84be4705c3.webp?size=128" alt="z0r0323" title="z0r0323">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">z0r0323</span>
+            <span class="time">🕐 03.01.2026, 21:20:11</span>
+        </div>
+        <div class="text">Salut, cu ce te pot ajuta??</div></div></div><div class="msg" style="animation-delay: 0.2s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/812319405480345623/6b433fca8a897bf4e1792ad667549cc5.webp?size=128" alt="_.antarctic_" title="_.antarctic_">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">_.antarctic_</span>
+            <span class="time">🕐 03.01.2026, 21:20:19</span>
+        </div>
+        <div class="text">am problema cu un staff</div></div></div><div class="msg" style="animation-delay: 0.25s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/812319405480345623/6b433fca8a897bf4e1792ad667549cc5.webp?size=128" alt="_.antarctic_" title="_.antarctic_">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">_.antarctic_</span>
+            <span class="time">🕐 03.01.2026, 21:20:35</span>
+        </div>
+        <div class="text">ma injura si mi-a schimbat si numele</div></div></div><div class="msg" style="animation-delay: 0.30000000000000004s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1448628682263494666/79cf396c817b117a4e6e5c84be4705c3.webp?size=128" alt="z0r0323" title="z0r0323">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">z0r0323</span>
+            <span class="time">🕐 03.01.2026, 21:20:47</span>
+        </div>
+        <div class="text">cu cine?</div></div></div><div class="msg" style="animation-delay: 0.35000000000000003s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/812319405480345623/6b433fca8a897bf4e1792ad667549cc5.webp?size=128" alt="_.antarctic_" title="_.antarctic_">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">_.antarctic_</span>
+            <span class="time">🕐 03.01.2026, 21:20:58</span>
+        </div>
+        <div class="text">uita-te in logs</div></div></div><div class="msg" style="animation-delay: 0.4s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/887378192212586548/da6e1cbafac7e7169b1d36d42c4e0a3d.webp?size=128" alt="crz.chris" title="crz.chris">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">crz.chris</span>
+            <span class="time">🕐 03.01.2026, 21:21:11</span>
+        </div>
+        <div class="text">Eu...</div></div></div><div class="msg" style="animation-delay: 0.45s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/812319405480345623/6b433fca8a897bf4e1792ad667549cc5.webp?size=128" alt="_.antarctic_" title="_.antarctic_">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">_.antarctic_</span>
+            <span class="time">🕐 03.01.2026, 21:21:25</span>
+        </div>
+        <div class="text">Stiti ca este motiv de sw</div></div></div><div class="msg" style="animation-delay: 0.5s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/887378192212586548/da6e1cbafac7e7169b1d36d42c4e0a3d.webp?size=128" alt="crz.chris" title="crz.chris">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">crz.chris</span>
+            <span class="time">🕐 03.01.2026, 21:21:37</span>
+        </div>
+        <div class="text">Am crezut ca imi esti prieten...</div></div></div><div class="msg" style="animation-delay: 0.55s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/887378192212586548/da6e1cbafac7e7169b1d36d42c4e0a3d.webp?size=128" alt="crz.chris" title="crz.chris">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">crz.chris</span>
+            <span class="time">🕐 03.01.2026, 21:21:44</span>
+        </div>
+        <div class="text">Dar esti un tradator...</div></div></div><div class="msg" style="animation-delay: 0.6000000000000001s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/812319405480345623/6b433fca8a897bf4e1792ad667549cc5.webp?size=128" alt="_.antarctic_" title="_.antarctic_">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">_.antarctic_</span>
+            <span class="time">🕐 03.01.2026, 21:21:44</span>
+        </div>
+        <div class="text">nu ne permitem</div></div></div><div class="msg" style="animation-delay: 0.65s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1448628682263494666/79cf396c817b117a4e6e5c84be4705c3.webp?size=128" alt="z0r0323" title="z0r0323">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">z0r0323</span>
+            <span class="time">🕐 03.01.2026, 21:21:45</span>
+        </div>
+        <div class="text">&lt;@887378192212586548&gt; de ce te bagi pe ticket</div></div></div><div class="msg" style="animation-delay: 0.7000000000000001s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/906940274490630195/dd489ddb2874322a28e1c673f9540eb2.webp?size=128" alt="papy_27" title="papy_27">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">papy_27</span>
+            <span class="time">🕐 03.01.2026, 21:21:47</span>
+        </div>
+        <div class="text">&lt;@1392903761076420750&gt; daca mai dat react uri iti dau alt sw</div></div></div><div class="msg" style="animation-delay: 0.75s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1448628682263494666/79cf396c817b117a4e6e5c84be4705c3.webp?size=128" alt="z0r0323" title="z0r0323">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">z0r0323</span>
+            <span class="time">🕐 03.01.2026, 21:21:51</span>
+        </div>
+        <div class="text">cand nu te-am chemat first of all?</div></div></div><div class="msg" style="animation-delay: 0.8s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/887378192212586548/da6e1cbafac7e7169b1d36d42c4e0a3d.webp?size=128" alt="crz.chris" title="crz.chris">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">crz.chris</span>
+            <span class="time">🕐 03.01.2026, 21:22:02</span>
+        </div>
+        <div class="text">Pai sa nu te mai uiti pe logs</div></div></div><div class="msg" style="animation-delay: 0.8500000000000001s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/887378192212586548/da6e1cbafac7e7169b1d36d42c4e0a3d.webp?size=128" alt="crz.chris" title="crz.chris">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">crz.chris</span>
+            <span class="time">🕐 03.01.2026, 21:22:06</span>
+        </div>
+        <div class="text">Am recunoscut</div></div></div><div class="msg" style="animation-delay: 0.9s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1448628682263494666/79cf396c817b117a4e6e5c84be4705c3.webp?size=128" alt="z0r0323" title="z0r0323">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">z0r0323</span>
+            <span class="time">🕐 03.01.2026, 21:22:14</span>
+        </div>
+        <div class="text">&lt;@255382293160394762&gt;</div></div></div><div class="msg" style="animation-delay: 0.9500000000000001s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/812319405480345623/6b433fca8a897bf4e1792ad667549cc5.webp?size=128" alt="_.antarctic_" title="_.antarctic_">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">_.antarctic_</span>
+            <span class="time">🕐 03.01.2026, 21:22:18</span>
+        </div>
+        <div class="text">1. CRZ abuzeaza
+2.Se baga peste tk</div></div></div><div class="msg" style="animation-delay: 1s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1448628682263494666/79cf396c817b117a4e6e5c84be4705c3.webp?size=128" alt="z0r0323" title="z0r0323">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">z0r0323</span>
+            <span class="time">🕐 03.01.2026, 21:22:21</span>
+        </div>
+        <div class="text">Il poti sanctiona tu pe CRZ?</div></div></div><div class="msg" style="animation-delay: 1.05s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/906940274490630195/dd489ddb2874322a28e1c673f9540eb2.webp?size=128" alt="papy_27" title="papy_27">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">papy_27</span>
+            <span class="time">🕐 03.01.2026, 21:22:30</span>
+        </div>
+        <div class="text">#  NU SE MAI BAGA NIMENI PESTE TICKET UL UNUL ALTUIA CINE II DA CLAIM ALA SE OCUPA</div></div></div><div class="msg" style="animation-delay: 1.1s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1448628682263494666/79cf396c817b117a4e6e5c84be4705c3.webp?size=128" alt="z0r0323" title="z0r0323">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">z0r0323</span>
+            <span class="time">🕐 03.01.2026, 21:22:36</span>
+        </div>
+        <div class="text"><em>Mesaj gol</em></div><div class="attach"><a href="https://cdn.discordapp.com/attachments/1457121331400413318/1457121999322087761/image.png?ex=695ada1c&is=6959889c&hm=9d3a4aa38af8a25cd456e6acd5a13095958c6961642b3a6167bebb9f8e289386&" target="_blank">📎 image.png</a></div></div></div><div class="msg" style="animation-delay: 1.1500000000000001s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/906940274490630195/dd489ddb2874322a28e1c673f9540eb2.webp?size=128" alt="papy_27" title="papy_27">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">papy_27</span>
+            <span class="time">🕐 03.01.2026, 21:22:45</span>
+        </div>
+        <div class="text"># CINE MAI SCRIE DE ACM PE TK SI NU E CLAIMAR UL ARE TM</div></div></div><div class="msg" style="animation-delay: 1.2000000000000002s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/255382293160394762/3986e8374bacb01df4a4103683e7d867.webp?size=128" alt="vylley" title="vylley">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">vylley</span>
+            <span class="time">🕐 03.01.2026, 21:23:15</span>
+        </div>
+        <div class="text">Da hai sa vedem</div></div></div><div class="msg" style="animation-delay: 1.25s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1448628682263494666/79cf396c817b117a4e6e5c84be4705c3.webp?size=128" alt="z0r0323" title="z0r0323">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">z0r0323</span>
+            <span class="time">🕐 03.01.2026, 21:23:22</span>
+        </div>
+        <div class="text">887378192212586548</div></div></div><div class="msg" style="animation-delay: 1.3s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1448628682263494666/79cf396c817b117a4e6e5c84be4705c3.webp?size=128" alt="z0r0323" title="z0r0323">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">z0r0323</span>
+            <span class="time">🕐 03.01.2026, 21:23:25</span>
+        </div>
+        <div class="text">asta e id-ul lui</div></div></div><div class="msg" style="animation-delay: 1.35s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/812319405480345623/6b433fca8a897bf4e1792ad667549cc5.webp?size=128" alt="_.antarctic_" title="_.antarctic_">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">_.antarctic_</span>
+            <span class="time">🕐 03.01.2026, 21:23:34</span>
+        </div>
+        <div class="text">stati asa</div></div></div><div class="msg" style="animation-delay: 1.4000000000000001s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1448628682263494666/79cf396c817b117a4e6e5c84be4705c3.webp?size=128" alt="z0r0323" title="z0r0323">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">z0r0323</span>
+            <span class="time">🕐 03.01.2026, 21:23:42</span>
+        </div>
+        <div class="text">Consider ca trebuie sanctionat cu un SW</div></div></div><div class="msg" style="animation-delay: 1.4500000000000002s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/812319405480345623/6b433fca8a897bf4e1792ad667549cc5.webp?size=128" alt="_.antarctic_" title="_.antarctic_">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">_.antarctic_</span>
+            <span class="time">🕐 03.01.2026, 21:23:47</span>
+        </div>
+        <div class="text">lasa</div></div></div><div class="msg" style="animation-delay: 1.5s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1448628682263494666/79cf396c817b117a4e6e5c84be4705c3.webp?size=128" alt="z0r0323" title="z0r0323">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">z0r0323</span>
+            <span class="time">🕐 03.01.2026, 21:23:49</span>
+        </div>
+        <div class="text">Da spune?</div></div></div><div class="msg" style="animation-delay: 1.55s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/255382293160394762/3986e8374bacb01df4a4103683e7d867.webp?size=128" alt="vylley" title="vylley">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">vylley</span>
+            <span class="time">🕐 03.01.2026, 21:23:53</span>
+        </div>
+        <div class="text">&lt;@812319405480345623&gt;  ii permiti lu crz sau pe bune sunteti prieteni ...? El pretinde ca sunteti prieteni</div></div></div><div class="msg" style="animation-delay: 1.6s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/255382293160394762/3986e8374bacb01df4a4103683e7d867.webp?size=128" alt="vylley" title="vylley">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">vylley</span>
+            <span class="time">🕐 03.01.2026, 21:24:08</span>
+        </div>
+        <div class="text">Deci care e faza ?</div></div></div><div class="msg" style="animation-delay: 1.6500000000000001s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1448628682263494666/79cf396c817b117a4e6e5c84be4705c3.webp?size=128" alt="z0r0323" title="z0r0323">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">z0r0323</span>
+            <span class="time">🕐 03.01.2026, 21:24:15</span>
+        </div>
+        <div class="text"><em>Mesaj gol</em></div><div class="attach"><a href="https://cdn.discordapp.com/attachments/1457121331400413318/1457122414952579164/image.png?ex=695ada7f&is=695988ff&hm=d36221afca6c0337753e08f271d357ba4d90919cd7e7d6ea8a57fad30b56d020&" target="_blank">📎 image.png</a></div></div></div><div class="msg" style="animation-delay: 1.7000000000000002s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1448628682263494666/79cf396c817b117a4e6e5c84be4705c3.webp?size=128" alt="z0r0323" title="z0r0323">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">z0r0323</span>
+            <span class="time">🕐 03.01.2026, 21:24:36</span>
+        </div>
+        <div class="text">CRZ a abuzat de grab prin faptul ca ii schimba nickname-ul de pe server</div></div></div><div class="msg" style="animation-delay: 1.75s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/812319405480345623/6b433fca8a897bf4e1792ad667549cc5.webp?size=128" alt="_.antarctic_" title="_.antarctic_">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">_.antarctic_</span>
+            <span class="time">🕐 03.01.2026, 21:24:54</span>
+        </div>
+        <div class="text">nu suntem prieteni</div></div></div><div class="msg" style="animation-delay: 1.8s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/887378192212586548/da6e1cbafac7e7169b1d36d42c4e0a3d.webp?size=128" alt="crz.chris" title="crz.chris">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">crz.chris</span>
+            <span class="time">🕐 03.01.2026, 21:25:02</span>
+        </div>
+        <div class="text">Suntem prieteni vechi dar mna...</div></div></div><div class="msg" style="animation-delay: 1.85s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1448628682263494666/79cf396c817b117a4e6e5c84be4705c3.webp?size=128" alt="z0r0323" title="z0r0323">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">z0r0323</span>
+            <span class="time">🕐 03.01.2026, 21:25:05</span>
+        </div>
+        <div class="text">din cate vad aici a dat si mute din click dreapta</div><div class="attach"><a href="https://cdn.discordapp.com/attachments/1457121331400413318/1457122625171230851/image.png?ex=695adab1&is=69598931&hm=7f4b406cf3ee4ead169c6b92f0f1cc08c6eab39fad394a2595e608b30d4b6235&" target="_blank">📎 image.png</a></div></div></div><div class="msg" style="animation-delay: 1.9000000000000001s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/887378192212586548/da6e1cbafac7e7169b1d36d42c4e0a3d.webp?size=128" alt="crz.chris" title="crz.chris">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">crz.chris</span>
+            <span class="time">🕐 03.01.2026, 21:25:19</span>
+        </div>
+        <div class="text">Ne stim de mult si e caterinca noastra dar mna...</div></div></div><div class="msg" style="animation-delay: 1.9500000000000002s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/812319405480345623/6b433fca8a897bf4e1792ad667549cc5.webp?size=128" alt="_.antarctic_" title="_.antarctic_">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">_.antarctic_</span>
+            <span class="time">🕐 03.01.2026, 21:25:38</span>
+        </div>
+        <div class="text">Eu cu el nu ne permitem</div></div></div><div class="msg" style="animation-delay: 2s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/255382293160394762/3986e8374bacb01df4a4103683e7d867.webp?size=128" alt="vylley" title="vylley">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">vylley</span>
+            <span class="time">🕐 03.01.2026, 21:25:58</span>
+        </div>
+        <div class="text">Bun atunci consider ca nu i permiti si am sa trec pe sanctiune ...crz i m sorry next time gandeste te te rog la cum vei actiona</div></div></div><div class="msg" style="animation-delay: 2.0500000000000003s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/812319405480345623/6b433fca8a897bf4e1792ad667549cc5.webp?size=128" alt="_.antarctic_" title="_.antarctic_">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">_.antarctic_</span>
+            <span class="time">🕐 03.01.2026, 21:26:17</span>
+        </div>
+        <div class="text">ce sanctiune?</div></div></div><div class="msg" style="animation-delay: 2.1s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/255382293160394762/3986e8374bacb01df4a4103683e7d867.webp?size=128" alt="vylley" title="vylley">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">vylley</span>
+            <span class="time">🕐 03.01.2026, 21:26:21</span>
+        </div>
+        <div class="text">Sw</div></div></div><div class="msg" style="animation-delay: 2.15s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/812319405480345623/6b433fca8a897bf4e1792ad667549cc5.webp?size=128" alt="_.antarctic_" title="_.antarctic_">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">_.antarctic_</span>
+            <span class="time">🕐 03.01.2026, 21:26:25</span>
+        </div>
+        <div class="text">bun</div></div></div><div class="msg" style="animation-delay: 2.2s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1448628682263494666/79cf396c817b117a4e6e5c84be4705c3.webp?size=128" alt="z0r0323" title="z0r0323">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">z0r0323</span>
+            <span class="time">🕐 03.01.2026, 21:26:37</span>
+        </div>
+        <div class="text">&lt;@812319405480345623&gt; mai te pot ajuta cumva?</div></div></div><div class="msg" style="animation-delay: 2.25s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/812319405480345623/6b433fca8a897bf4e1792ad667549cc5.webp?size=128" alt="_.antarctic_" title="_.antarctic_">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">_.antarctic_</span>
+            <span class="time">🕐 03.01.2026, 21:26:43</span>
+        </div>
+        <div class="text">ma trage si pe vc</div></div></div><div class="msg" style="animation-delay: 2.3000000000000003s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/812319405480345623/6b433fca8a897bf4e1792ad667549cc5.webp?size=128" alt="_.antarctic_" title="_.antarctic_">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">_.antarctic_</span>
+            <span class="time">🕐 03.01.2026, 21:26:48</span>
+        </div>
+        <div class="text">acum</div></div></div><div class="msg" style="animation-delay: 2.35s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/887378192212586548/da6e1cbafac7e7169b1d36d42c4e0a3d.webp?size=128" alt="crz.chris" title="crz.chris">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">crz.chris</span>
+            <span class="time">🕐 03.01.2026, 21:27:08</span>
+        </div>
+        <div class="text">Avem si dm-uri....</div></div></div><div class="msg" style="animation-delay: 2.4000000000000004s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/812319405480345623/6b433fca8a897bf4e1792ad667549cc5.webp?size=128" alt="_.antarctic_" title="_.antarctic_">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">_.antarctic_</span>
+            <span class="time">🕐 03.01.2026, 21:27:19</span>
+        </div>
+        <div class="text">nu ne permitem</div></div></div><div class="msg" style="animation-delay: 2.45s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/887378192212586548/da6e1cbafac7e7169b1d36d42c4e0a3d.webp?size=128" alt="crz.chris" title="crz.chris">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">crz.chris</span>
+            <span class="time">🕐 03.01.2026, 21:27:25</span>
+        </div>
+        <div class="text">Esti sarpe ba...</div></div></div><div class="msg" style="animation-delay: 2.5s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1448628682263494666/79cf396c817b117a4e6e5c84be4705c3.webp?size=128" alt="z0r0323" title="z0r0323">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">z0r0323</span>
+            <span class="time">🕐 03.01.2026, 21:27:29</span>
+        </div>
+        <div class="text">&lt;@255382293160394762&gt; Acum il si trage de pe voice-uri</div></div></div><div class="msg" style="animation-delay: 2.5500000000000003s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/887378192212586548/da6e1cbafac7e7169b1d36d42c4e0a3d.webp?size=128" alt="crz.chris" title="crz.chris">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">crz.chris</span>
+            <span class="time">🕐 03.01.2026, 21:27:35</span>
+        </div>
+        <div class="text">Ba dar asta nu trb sa aiba ban?</div></div></div><div class="msg" style="animation-delay: 2.6s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/255382293160394762/3986e8374bacb01df4a4103683e7d867.webp?size=128" alt="vylley" title="vylley">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">vylley</span>
+            <span class="time">🕐 03.01.2026, 21:27:38</span>
+        </div>
+        <div class="text">Vezi ca ai 2 din 4</div></div></div><div class="msg" style="animation-delay: 2.6500000000000004s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/887378192212586548/da6e1cbafac7e7169b1d36d42c4e0a3d.webp?size=128" alt="crz.chris" title="crz.chris">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">crz.chris</span>
+            <span class="time">🕐 03.01.2026, 21:27:46</span>
+        </div>
+        <div class="text">Ca o dat greaf pe hall of fame</div></div></div><div class="msg" style="animation-delay: 2.7s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/887378192212586548/da6e1cbafac7e7169b1d36d42c4e0a3d.webp?size=128" alt="crz.chris" title="crz.chris">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">crz.chris</span>
+            <span class="time">🕐 03.01.2026, 21:27:47</span>
+        </div>
+        <div class="text">....</div></div></div><div class="msg" style="animation-delay: 2.75s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/255382293160394762/3986e8374bacb01df4a4103683e7d867.webp?size=128" alt="vylley" title="vylley">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">vylley</span>
+            <span class="time">🕐 03.01.2026, 21:27:48</span>
+        </div>
+        <div class="text">Te rog sa incetezi</div></div></div><div class="msg" style="animation-delay: 2.8000000000000003s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1448628682263494666/79cf396c817b117a4e6e5c84be4705c3.webp?size=128" alt="z0r0323" title="z0r0323">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">z0r0323</span>
+            <span class="time">🕐 03.01.2026, 21:27:51</span>
+        </div>
+        <div class="text">&lt;@887378192212586548&gt;</div><div class="attach"><a href="https://cdn.discordapp.com/attachments/1457121331400413318/1457123320767185129/image.png?ex=695adb57&is=695989d7&hm=aa7dad6666f2126dec34971ae74d20d3711622dad3784097ae0fb82f991c950b&" target="_blank">📎 image.png</a></div></div></div><div class="msg" style="animation-delay: 2.85s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/812319405480345623/6b433fca8a897bf4e1792ad667549cc5.webp?size=128" alt="_.antarctic_" title="_.antarctic_">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">_.antarctic_</span>
+            <span class="time">🕐 03.01.2026, 21:28:03</span>
+        </div>
+        <div class="text">nu am ban ca am vb cu Flav</div></div></div><div class="msg" style="animation-delay: 2.9000000000000004s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/887378192212586548/da6e1cbafac7e7169b1d36d42c4e0a3d.webp?size=128" alt="crz.chris" title="crz.chris">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">crz.chris</span>
+            <span class="time">🕐 03.01.2026, 21:28:10</span>
+        </div>
+        <div class="text">Nu cont...</div></div></div><div class="msg" style="animation-delay: 2.95s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/255382293160394762/3986e8374bacb01df4a4103683e7d867.webp?size=128" alt="vylley" title="vylley">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">vylley</span>
+            <span class="time">🕐 03.01.2026, 21:28:12</span>
+        </div>
+        <div class="text">VORBITI IN PV</div></div></div><div class="msg" style="animation-delay: 3s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/255382293160394762/3986e8374bacb01df4a4103683e7d867.webp?size=128" alt="vylley" title="vylley">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">vylley</span>
+            <span class="time">🕐 03.01.2026, 21:28:15</span>
+        </div>
+        <div class="text">Zoro inchide tk</div></div></div><div class="msg" style="animation-delay: 3.0500000000000003s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/887378192212586548/da6e1cbafac7e7169b1d36d42c4e0a3d.webp?size=128" alt="crz.chris" title="crz.chris">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">crz.chris</span>
+            <span class="time">🕐 03.01.2026, 21:28:17</span>
+        </div>
+        <div class="text">Faptele nu se iarta</div></div></div><div class="msg" style="animation-delay: 3.1s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1455229229775065361/a_07b088393f9e5f661d5637dd10c60271.gif?size=128" alt="dr1p-new#5884" title="dr1p-new#5884">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">dr1p-new#5884</span>
+            <span class="time">🕐 03.01.2026, 21:28:19</span>
+        </div>
+        <div class="text"><em>Mesaj gol</em></div><div class="embed-note">📊 Embed inclus (1)</div></div></div>
+    </div>
+</main>
+
+<footer>
+    <p>Transcript generat automat de DR1P Bot • Sistem de Tickete</p>
+</footer>
+
+</body>
+</html>
