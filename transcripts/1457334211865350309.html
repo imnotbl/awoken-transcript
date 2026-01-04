@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Transcript – rs-951862</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #0f172a 0%, #1a1f2e 50%, #0f1419 100%);
+    color: #e5e7eb;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    min-height: 100vh;
+}
+
+header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    padding: 24px 16px;
+    background: rgba(2, 6, 23, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 2px solid #1e293b;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    animation: slideDown 0.6s ease-out;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+header h1 {
+    margin: 0 0 8px 0;
+    font-size: 28px;
+    background: linear-gradient(135deg, #60a5fa 0%, #7c3aed 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+header .header-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+header small {
+    color: #94a3b8;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.msg-count {
+    background: linear-gradient(135deg, #0f766e 0%, #0e7490 100%);
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #5eead4;
+    border: 1px solid #155e75;
+}
+
+main {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 32px 16px;
+}
+
+.messages-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.msg {
+    display: flex;
+    gap: 14px;
+    background: linear-gradient(135deg, rgba(30, 41, 59, 0.4) 0%, rgba(15, 23, 42, 0.3) 100%);
+    border: 1px solid rgba(148, 163, 184, 0.15);
+    border-radius: 14px;
+    padding: 16px;
+    animation: fadeInUp 0.5s ease-out both;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.msg::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transition: left 0.5s;
+}
+
+.msg:hover {
+    border-color: rgba(96, 165, 250, 0.3);
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(99, 102, 241, 0.05) 100%);
+    transform: translateX(4px);
+    box-shadow: 0 8px 24px rgba(59, 130, 246, 0.15);
+}
+
+.msg:hover::before {
+    left: 100%;
+}
+
+.avatar-wrapper {
+    position: relative;
+    flex-shrink: 0;
+}
+
+.avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    border: 2px solid #1e293b;
+    transition: all 0.3s ease;
+    object-fit: cover;
+}
+
+.avatar-badge {
+    position: absolute;
+    bottom: -2px;
+    right: -2px;
+    width: 14px;
+    height: 14px;
+    background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+    border: 2px solid #0f172a;
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7);
+    }
+    50% {
+        box-shadow: 0 0 0 6px rgba(34, 197, 94, 0);
+    }
+}
+
+.msg:hover .avatar {
+    transform: scale(1.1) rotate(-5deg);
+    border-color: #60a5fa;
+}
+
+.content-wrapper {
+    flex: 1;
+    min-width: 0;
+}
+
+.msg-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 8px;
+    flex-wrap: wrap;
+}
+
+.author {
+    font-weight: 600;
+    font-size: 14px;
+    background: linear-gradient(135deg, #60a5fa 0%, #7c3aed 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.time {
+    color: #64748b;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.text {
+    color: #e5e7eb;
+    line-height: 1.6;
+    word-break: break-word;
+    white-space: pre-wrap;
+    font-size: 14px;
+    margin: 0;
+}
+
+.attach {
+    margin-top: 10px;
+    padding: 8px 12px;
+    background: linear-gradient(135deg, rgba(34, 197, 94, 0.1) 0%, rgba(34, 197, 94, 0.05) 100%);
+    border-left: 3px solid #22c55e;
+    border-radius: 6px;
+    font-size: 12px;
+}
+
+.attach a {
+    color: #4ade80;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.attach a:hover {
+    color: #86efac;
+    text-decoration: underline;
+}
+
+.embed-note {
+    margin-top: 10px;
+    padding: 8px 12px;
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(99, 102, 241, 0.05) 100%);
+    border-left: 3px solid #6366f1;
+    border-radius: 6px;
+    font-size: 12px;
+    color: #a5b4fc;
+    font-weight: 500;
+}
+
+footer {
+    text-align: center;
+    padding: 32px 16px;
+    color: #64748b;
+    font-size: 12px;
+    border-top: 1px solid #1e293b;
+    margin-top: 48px;
+}
+
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 22px;
+    }
+
+    header .header-info {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .msg {
+        padding: 12px;
+        gap: 10px;
+    }
+
+    .avatar {
+        width: 40px;
+        height: 40px;
+    }
+
+    main {
+        padding: 16px 12px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation: none !important;
+        transition: none !important;
+    }
+}
+</style>
+</head>
+
+<body>
+<header>
+    <h1>🎫 #rs-951862</h1>
+    <div class="header-info">
+        <small>📅 04.01.2026, 11:32:40</small>
+        <div class="msg-count">📨 32 mesaje</div>
+    </div>
+</header>
+
+<main>
+    <div class="messages-container">
+        <div class="msg" style="animation-delay: 0s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1455229229775065361/a_07b088393f9e5f661d5637dd10c60271.gif?size=128" alt="dr1p-new#5884" title="dr1p-new#5884">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">dr1p-new#5884</span>
+            <span class="time">🕐 04.01.2026, 11:25:52</span>
+        </div>
+        <div class="text">&lt;@&amp;1447415103283662898&gt; &lt;@&amp;1447415102092345467&gt; &lt;@&amp;1447415099353600152&gt; &lt;@&amp;1447370749299130524&gt; &lt;@1058026086325289002&gt;</div><div class="embed-note">📊 Embed inclus (1)</div></div></div><div class="msg" style="animation-delay: 0.05s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1058026086325289002/a_4a7b488069e0f80a1ef0e015d8bb2501.gif?size=128" alt="0kps." title="0kps.">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">0kps.</span>
+            <span class="time">🕐 04.01.2026, 11:26:00</span>
+        </div>
+        <div class="text">salut</div></div></div><div class="msg" style="animation-delay: 0.1s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1058026086325289002/a_4a7b488069e0f80a1ef0e015d8bb2501.gif?size=128" alt="0kps." title="0kps.">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">0kps.</span>
+            <span class="time">🕐 04.01.2026, 11:26:05</span>
+        </div>
+        <div class="text">abuz</div></div></div><div class="msg" style="animation-delay: 0.15000000000000002s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1058026086325289002/a_4a7b488069e0f80a1ef0e015d8bb2501.gif?size=128" alt="0kps." title="0kps.">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">0kps.</span>
+            <span class="time">🕐 04.01.2026, 11:26:07</span>
+        </div>
+        <div class="text">grad</div></div></div><div class="msg" style="animation-delay: 0.2s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1058026086325289002/a_4a7b488069e0f80a1ef0e015d8bb2501.gif?size=128" alt="0kps." title="0kps.">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">0kps.</span>
+            <span class="time">🕐 04.01.2026, 11:26:09</span>
+        </div>
+        <div class="text">ma scoate de pe vc</div></div></div><div class="msg" style="animation-delay: 0.25s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1058026086325289002/a_4a7b488069e0f80a1ef0e015d8bb2501.gif?size=128" alt="0kps." title="0kps.">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">0kps.</span>
+            <span class="time">🕐 04.01.2026, 11:26:14</span>
+        </div>
+        <div class="text">si eu nu tolerez astfel de abuz</div></div></div><div class="msg" style="animation-delay: 0.30000000000000004s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1058026086325289002/a_4a7b488069e0f80a1ef0e015d8bb2501.gif?size=128" alt="0kps." title="0kps.">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">0kps.</span>
+            <span class="time">🕐 04.01.2026, 11:26:15</span>
+        </div>
+        <div class="text">asupra mea</div></div></div><div class="msg" style="animation-delay: 0.35000000000000003s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1455229229775065361/a_07b088393f9e5f661d5637dd10c60271.gif?size=128" alt="dr1p-new#5884" title="dr1p-new#5884">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">dr1p-new#5884</span>
+            <span class="time">🕐 04.01.2026, 11:26:34</span>
+        </div>
+        <div class="text"><em>Mesaj gol</em></div><div class="embed-note">📊 Embed inclus (1)</div></div></div><div class="msg" style="animation-delay: 0.4s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/906940274490630195/b6158bc3e40a48e37316d2160a3d5299.webp?size=128" alt="papy_27" title="papy_27">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">papy_27</span>
+            <span class="time">🕐 04.01.2026, 11:26:39</span>
+        </div>
+        <div class="text">salut</div></div></div><div class="msg" style="animation-delay: 0.45s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/906940274490630195/b6158bc3e40a48e37316d2160a3d5299.webp?size=128" alt="papy_27" title="papy_27">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">papy_27</span>
+            <span class="time">🕐 04.01.2026, 11:26:40</span>
+        </div>
+        <div class="text">dovada?</div></div></div><div class="msg" style="animation-delay: 0.5s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/614402987795939381/a_0cebf5b7d9680f54c89a23b71dd1d700.gif?size=128" alt="catalin_jr10" title="catalin_jr10">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">catalin_jr10</span>
+            <span class="time">🕐 04.01.2026, 11:26:48</span>
+        </div>
+        <div class="text">Papy nu era mai bine sa lași un ass manager?</div></div></div><div class="msg" style="animation-delay: 0.55s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1058026086325289002/a_4a7b488069e0f80a1ef0e015d8bb2501.gif?size=128" alt="0kps." title="0kps.">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">0kps.</span>
+            <span class="time">🕐 04.01.2026, 11:26:56</span>
+        </div>
+        <div class="text">uitate</div></div></div><div class="msg" style="animation-delay: 0.6000000000000001s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1058026086325289002/a_4a7b488069e0f80a1ef0e015d8bb2501.gif?size=128" alt="0kps." title="0kps.">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">0kps.</span>
+            <span class="time">🕐 04.01.2026, 11:26:58</span>
+        </div>
+        <div class="text">pe</div></div></div><div class="msg" style="animation-delay: 0.65s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1058026086325289002/a_4a7b488069e0f80a1ef0e015d8bb2501.gif?size=128" alt="0kps." title="0kps.">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">0kps.</span>
+            <span class="time">🕐 04.01.2026, 11:26:59</span>
+        </div>
+        <div class="text">audit log</div></div></div><div class="msg" style="animation-delay: 0.7000000000000001s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/906940274490630195/b6158bc3e40a48e37316d2160a3d5299.webp?size=128" alt="papy_27" title="papy_27">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">papy_27</span>
+            <span class="time">🕐 04.01.2026, 11:27:07</span>
+        </div>
+        <div class="text">daca nu ai dovada nu am cu ce sa te ajut</div></div></div><div class="msg" style="animation-delay: 0.75s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1058026086325289002/a_4a7b488069e0f80a1ef0e015d8bb2501.gif?size=128" alt="0kps." title="0kps.">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">0kps.</span>
+            <span class="time">🕐 04.01.2026, 11:27:12</span>
+        </div>
+        <div class="text">bine stai</div></div></div><div class="msg" style="animation-delay: 0.8s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1058026086325289002/a_4a7b488069e0f80a1ef0e015d8bb2501.gif?size=128" alt="0kps." title="0kps.">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">0kps.</span>
+            <span class="time">🕐 04.01.2026, 11:28:55</span>
+        </div>
+        <div class="text"><em>Mesaj gol</em></div><div class="attach"><a href="https://cdn.discordapp.com/attachments/1457334211865350309/1457334980857561120/image.png?ex=695ba077&is=695a4ef7&hm=67bbb2880d4d2821c8d763cbe2a84b66453710deb093b82e2a32197c5ca02213&" target="_blank">📎 image.png</a></div></div></div><div class="msg" style="animation-delay: 0.8500000000000001s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/906940274490630195/b6158bc3e40a48e37316d2160a3d5299.webp?size=128" alt="papy_27" title="papy_27">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">papy_27</span>
+            <span class="time">🕐 04.01.2026, 11:29:56</span>
+        </div>
+        <div class="text">#add 1040992664167915520</div></div></div><div class="msg" style="animation-delay: 0.9s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1455229229775065361/a_07b088393f9e5f661d5637dd10c60271.gif?size=128" alt="dr1p-new#5884" title="dr1p-new#5884">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">dr1p-new#5884</span>
+            <span class="time">🕐 04.01.2026, 11:29:58</span>
+        </div>
+        <div class="text"><em>Mesaj gol</em></div><div class="embed-note">📊 Embed inclus (1)</div></div></div><div class="msg" style="animation-delay: 0.9500000000000001s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/906940274490630195/b6158bc3e40a48e37316d2160a3d5299.webp?size=128" alt="papy_27" title="papy_27">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">papy_27</span>
+            <span class="time">🕐 04.01.2026, 11:30:07</span>
+        </div>
+        <div class="text">&lt;@1040992664167915520&gt; dc i ai dat mut lui baiatu asta ?</div></div></div><div class="msg" style="animation-delay: 1s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1058026086325289002/a_4a7b488069e0f80a1ef0e015d8bb2501.gif?size=128" alt="0kps." title="0kps.">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">0kps.</span>
+            <span class="time">🕐 04.01.2026, 11:30:25</span>
+        </div>
+        <div class="text">si disconnect</div></div></div><div class="msg" style="animation-delay: 1.05s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1058026086325289002/a_4a7b488069e0f80a1ef0e015d8bb2501.gif?size=128" alt="0kps." title="0kps.">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">0kps.</span>
+            <span class="time">🕐 04.01.2026, 11:30:27</span>
+        </div>
+        <div class="text">zicea ca</div></div></div><div class="msg" style="animation-delay: 1.1s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1058026086325289002/a_4a7b488069e0f80a1ef0e015d8bb2501.gif?size=128" alt="0kps." title="0kps.">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">0kps.</span>
+            <span class="time">🕐 04.01.2026, 11:30:33</span>
+        </div>
+        <div class="text">&quot;ma doaren pula daca imi scoate gradu&quot;</div></div></div><div class="msg" style="animation-delay: 1.1500000000000001s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/906940274490630195/b6158bc3e40a48e37316d2160a3d5299.webp?size=128" alt="papy_27" title="papy_27">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">papy_27</span>
+            <span class="time">🕐 04.01.2026, 11:30:38</span>
+        </div>
+        <div class="text">nu mai face free chat sau iti inchid ticket ul</div></div></div><div class="msg" style="animation-delay: 1.2000000000000002s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/906940274490630195/b6158bc3e40a48e37316d2160a3d5299.webp?size=128" alt="papy_27" title="papy_27">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">papy_27</span>
+            <span class="time">🕐 04.01.2026, 11:30:42</span>
+        </div>
+        <div class="text">asteapta</div></div></div><div class="msg" style="animation-delay: 1.25s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1058026086325289002/a_4a7b488069e0f80a1ef0e015d8bb2501.gif?size=128" alt="0kps." title="0kps.">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">0kps.</span>
+            <span class="time">🕐 04.01.2026, 11:31:52</span>
+        </div>
+        <div class="text">ce freechat vere</div></div></div><div class="msg" style="animation-delay: 1.3s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1058026086325289002/a_4a7b488069e0f80a1ef0e015d8bb2501.gif?size=128" alt="0kps." title="0kps.">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">0kps.</span>
+            <span class="time">🕐 04.01.2026, 11:32:02</span>
+        </div>
+        <div class="text">astia ti se pare tie freechat?</div></div></div><div class="msg" style="animation-delay: 1.35s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/906940274490630195/b6158bc3e40a48e37316d2160a3d5299.webp?size=128" alt="papy_27" title="papy_27">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">papy_27</span>
+            <span class="time">🕐 04.01.2026, 11:32:23</span>
+        </div>
+        <div class="text">ok i am scos gradul ca nu vrea sa raspunda</div></div></div><div class="msg" style="animation-delay: 1.4000000000000001s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/906940274490630195/b6158bc3e40a48e37316d2160a3d5299.webp?size=128" alt="papy_27" title="papy_27">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">papy_27</span>
+            <span class="time">🕐 04.01.2026, 11:32:27</span>
+        </div>
+        <div class="text">nu mai are accs la mute</div></div></div><div class="msg" style="animation-delay: 1.4500000000000002s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/906940274490630195/b6158bc3e40a48e37316d2160a3d5299.webp?size=128" alt="papy_27" title="papy_27">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">papy_27</span>
+            <span class="time">🕐 04.01.2026, 11:32:30</span>
+        </div>
+        <div class="text">te mai ajut cu cv?</div></div></div><div class="msg" style="animation-delay: 1.5s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1058026086325289002/a_4a7b488069e0f80a1ef0e015d8bb2501.gif?size=128" alt="0kps." title="0kps.">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">0kps.</span>
+            <span class="time">🕐 04.01.2026, 11:32:32</span>
+        </div>
+        <div class="text">nu pa</div></div></div><div class="msg" style="animation-delay: 1.55s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1455229229775065361/a_07b088393f9e5f661d5637dd10c60271.gif?size=128" alt="dr1p-new#5884" title="dr1p-new#5884">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">dr1p-new#5884</span>
+            <span class="time">🕐 04.01.2026, 11:32:37</span>
+        </div>
+        <div class="text"><em>Mesaj gol</em></div><div class="embed-note">📊 Embed inclus (1)</div></div></div>
+    </div>
+</main>
+
+<footer>
+    <p>Transcript generat automat de DR1P Bot • Sistem de Tickete</p>
+</footer>
+
+</body>
+</html>
