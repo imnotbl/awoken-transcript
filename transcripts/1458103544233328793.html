@@ -1,0 +1,1669 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Transcript – rs-374941</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #0f172a 0%, #1a1f2e 50%, #0f1419 100%);
+    color: #e5e7eb;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    min-height: 100vh;
+}
+
+header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    padding: 24px 16px;
+    background: rgba(2, 6, 23, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 2px solid #1e293b;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    animation: slideDown 0.6s ease-out;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+header h1 {
+    margin: 0 0 8px 0;
+    font-size: 28px;
+    background: linear-gradient(135deg, #60a5fa 0%, #7c3aed 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+header .header-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+header small {
+    color: #94a3b8;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.msg-count {
+    background: linear-gradient(135deg, #0f766e 0%, #0e7490 100%);
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #5eead4;
+    border: 1px solid #155e75;
+}
+
+main {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 32px 16px;
+}
+
+.messages-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.msg {
+    display: flex;
+    gap: 14px;
+    background: linear-gradient(135deg, rgba(30, 41, 59, 0.4) 0%, rgba(15, 23, 42, 0.3) 100%);
+    border: 1px solid rgba(148, 163, 184, 0.15);
+    border-radius: 14px;
+    padding: 16px;
+    animation: fadeInUp 0.5s ease-out both;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.msg::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transition: left 0.5s;
+}
+
+.msg:hover {
+    border-color: rgba(96, 165, 250, 0.3);
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(99, 102, 241, 0.05) 100%);
+    transform: translateX(4px);
+    box-shadow: 0 8px 24px rgba(59, 130, 246, 0.15);
+}
+
+.msg:hover::before {
+    left: 100%;
+}
+
+.avatar-wrapper {
+    position: relative;
+    flex-shrink: 0;
+}
+
+.avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    border: 2px solid #1e293b;
+    transition: all 0.3s ease;
+    object-fit: cover;
+}
+
+.avatar-badge {
+    position: absolute;
+    bottom: -2px;
+    right: -2px;
+    width: 14px;
+    height: 14px;
+    background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+    border: 2px solid #0f172a;
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7);
+    }
+    50% {
+        box-shadow: 0 0 0 6px rgba(34, 197, 94, 0);
+    }
+}
+
+.msg:hover .avatar {
+    transform: scale(1.1) rotate(-5deg);
+    border-color: #60a5fa;
+}
+
+.content-wrapper {
+    flex: 1;
+    min-width: 0;
+}
+
+.msg-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 8px;
+    flex-wrap: wrap;
+}
+
+.author {
+    font-weight: 600;
+    font-size: 14px;
+    background: linear-gradient(135deg, #60a5fa 0%, #7c3aed 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.time {
+    color: #64748b;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.text {
+    color: #e5e7eb;
+    line-height: 1.6;
+    word-break: break-word;
+    white-space: pre-wrap;
+    font-size: 14px;
+    margin: 0;
+}
+
+.attach {
+    margin-top: 10px;
+    padding: 8px 12px;
+    background: linear-gradient(135deg, rgba(34, 197, 94, 0.1) 0%, rgba(34, 197, 94, 0.05) 100%);
+    border-left: 3px solid #22c55e;
+    border-radius: 6px;
+    font-size: 12px;
+}
+
+.attach a {
+    color: #4ade80;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.attach a:hover {
+    color: #86efac;
+    text-decoration: underline;
+}
+
+.embed-note {
+    margin-top: 10px;
+    padding: 8px 12px;
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(99, 102, 241, 0.05) 100%);
+    border-left: 3px solid #6366f1;
+    border-radius: 6px;
+    font-size: 12px;
+    color: #a5b4fc;
+    font-weight: 500;
+}
+
+footer {
+    text-align: center;
+    padding: 32px 16px;
+    color: #64748b;
+    font-size: 12px;
+    border-top: 1px solid #1e293b;
+    margin-top: 48px;
+}
+
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 22px;
+    }
+
+    header .header-info {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .msg {
+        padding: 12px;
+        gap: 10px;
+    }
+
+    .avatar {
+        width: 40px;
+        height: 40px;
+    }
+
+    main {
+        padding: 16px 12px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation: none !important;
+        transition: none !important;
+    }
+}
+</style>
+</head>
+
+<body>
+<header>
+    <h1>🎫 #rs-374941</h1>
+    <div class="header-info">
+        <small>📅 06.01.2026, 14:35:00</small>
+        <div class="msg-count">📨 135 mesaje</div>
+    </div>
+</header>
+
+<main>
+    <div class="messages-container">
+        <div class="msg" style="animation-delay: 0s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1455229229775065361/a_07b088393f9e5f661d5637dd10c60271.gif?size=128" alt="dr1p-new#5884" title="dr1p-new#5884">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">dr1p-new#5884</span>
+            <span class="time">🕐 06.01.2026, 14:22:56</span>
+        </div>
+        <div class="text">&lt;@&amp;1447415103283662898&gt; &lt;@&amp;1447415102092345467&gt; &lt;@&amp;1447415099353600152&gt; &lt;@&amp;1447370749299130524&gt; &lt;@1142174602819289188&gt;</div><div class="embed-note">📊 Embed inclus (1)</div></div></div><div class="msg" style="animation-delay: 0.05s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/614402987795939381/115c7c877729f2cb160b3ea54917e1c9.webp?size=128" alt="catalin_jr10" title="catalin_jr10">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">catalin_jr10</span>
+            <span class="time">🕐 06.01.2026, 14:23:03</span>
+        </div>
+        <div class="text">Da</div></div></div><div class="msg" style="animation-delay: 0.1s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/614402987795939381/115c7c877729f2cb160b3ea54917e1c9.webp?size=128" alt="catalin_jr10" title="catalin_jr10">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">catalin_jr10</span>
+            <span class="time">🕐 06.01.2026, 14:23:04</span>
+        </div>
+        <div class="text">Z8 gbr</div></div></div><div class="msg" style="animation-delay: 0.15000000000000002s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1142174602819289188/2872386088efad73ae457178c67ea2d6.webp?size=128" alt="r4lu_" title="r4lu_">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">r4lu_</span>
+            <span class="time">🕐 06.01.2026, 14:23:06</span>
+        </div>
+        <div class="text">bună</div></div></div><div class="msg" style="animation-delay: 0.2s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/614402987795939381/115c7c877729f2cb160b3ea54917e1c9.webp?size=128" alt="catalin_jr10" title="catalin_jr10">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">catalin_jr10</span>
+            <span class="time">🕐 06.01.2026, 14:23:07</span>
+        </div>
+        <div class="text">Zi*</div></div></div><div class="msg" style="animation-delay: 0.25s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1142174602819289188/2872386088efad73ae457178c67ea2d6.webp?size=128" alt="r4lu_" title="r4lu_">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">r4lu_</span>
+            <span class="time">🕐 06.01.2026, 14:23:16</span>
+        </div>
+        <div class="text">mi a schimbat cineva numele</div></div></div><div class="msg" style="animation-delay: 0.30000000000000004s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/966637812487180298/449b933b1d8c0ae191b6b6ca6c50b21b.webp?size=128" alt="_pussydestroy3r" title="_pussydestroy3r">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">_pussydestroy3r</span>
+            <span class="time">🕐 06.01.2026, 14:23:19</span>
+        </div>
+        <div class="text">eu</div></div></div><div class="msg" style="animation-delay: 0.35000000000000003s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1142174602819289188/2872386088efad73ae457178c67ea2d6.webp?size=128" alt="r4lu_" title="r4lu_">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">r4lu_</span>
+            <span class="time">🕐 06.01.2026, 14:23:21</span>
+        </div>
+        <div class="text">uita te în log uri</div></div></div><div class="msg" style="animation-delay: 0.4s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/614402987795939381/115c7c877729f2cb160b3ea54917e1c9.webp?size=128" alt="catalin_jr10" title="catalin_jr10">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">catalin_jr10</span>
+            <span class="time">🕐 06.01.2026, 14:23:23</span>
+        </div>
+        <div class="text">😂😂</div></div></div><div class="msg" style="animation-delay: 0.45s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/966637812487180298/449b933b1d8c0ae191b6b6ca6c50b21b.webp?size=128" alt="_pussydestroy3r" title="_pussydestroy3r">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">_pussydestroy3r</span>
+            <span class="time">🕐 06.01.2026, 14:23:27</span>
+        </div>
+        <div class="text">ieu ti l-am schimbat</div></div></div><div class="msg" style="animation-delay: 0.5s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1142174602819289188/2872386088efad73ae457178c67ea2d6.webp?size=128" alt="r4lu_" title="r4lu_">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">r4lu_</span>
+            <span class="time">🕐 06.01.2026, 14:23:34</span>
+        </div>
+        <div class="text">minte</div></div></div><div class="msg" style="animation-delay: 0.55s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1315311813583437847/59b04884898bdd985eef738f059f0f7c.webp?size=128" alt="bossdenoss" title="bossdenoss">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">bossdenoss</span>
+            <span class="time">🕐 06.01.2026, 14:23:40</span>
+        </div>
+        <div class="text">eu</div></div></div><div class="msg" style="animation-delay: 0.6000000000000001s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/614402987795939381/115c7c877729f2cb160b3ea54917e1c9.webp?size=128" alt="catalin_jr10" title="catalin_jr10">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">catalin_jr10</span>
+            <span class="time">🕐 06.01.2026, 14:23:43</span>
+        </div>
+        <div class="text">Dacă el zice ca ti la schimbat</div></div></div><div class="msg" style="animation-delay: 0.65s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/614402987795939381/115c7c877729f2cb160b3ea54917e1c9.webp?size=128" alt="catalin_jr10" title="catalin_jr10">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">catalin_jr10</span>
+            <span class="time">🕐 06.01.2026, 14:23:46</span>
+        </div>
+        <div class="text">Poate eu</div></div></div><div class="msg" style="animation-delay: 0.7000000000000001s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/614402987795939381/115c7c877729f2cb160b3ea54917e1c9.webp?size=128" alt="catalin_jr10" title="catalin_jr10">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">catalin_jr10</span>
+            <span class="time">🕐 06.01.2026, 14:23:49</span>
+        </div>
+        <div class="text">Ti l am schimbat</div></div></div><div class="msg" style="animation-delay: 0.75s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1142174602819289188/2872386088efad73ae457178c67ea2d6.webp?size=128" alt="r4lu_" title="r4lu_">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">r4lu_</span>
+            <span class="time">🕐 06.01.2026, 14:23:52</span>
+        </div>
+        <div class="text">uita te în log uri</div></div></div><div class="msg" style="animation-delay: 0.8s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/614402987795939381/115c7c877729f2cb160b3ea54917e1c9.webp?size=128" alt="catalin_jr10" title="catalin_jr10">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">catalin_jr10</span>
+            <span class="time">🕐 06.01.2026, 14:23:56</span>
+        </div>
+        <div class="text">Lene</div></div></div><div class="msg" style="animation-delay: 0.8500000000000001s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/614402987795939381/115c7c877729f2cb160b3ea54917e1c9.webp?size=128" alt="catalin_jr10" title="catalin_jr10">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">catalin_jr10</span>
+            <span class="time">🕐 06.01.2026, 14:23:59</span>
+        </div>
+        <div class="text">&lt;@1315311813583437847&gt;</div></div></div><div class="msg" style="animation-delay: 0.9s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1142174602819289188/2872386088efad73ae457178c67ea2d6.webp?size=128" alt="r4lu_" title="r4lu_">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">r4lu_</span>
+            <span class="time">🕐 06.01.2026, 14:24:00</span>
+        </div>
+        <div class="text"># VA BATEȚI JOC DE MINE</div></div></div><div class="msg" style="animation-delay: 0.9500000000000001s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/614402987795939381/115c7c877729f2cb160b3ea54917e1c9.webp?size=128" alt="catalin_jr10" title="catalin_jr10">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">catalin_jr10</span>
+            <span class="time">🕐 06.01.2026, 14:24:02</span>
+        </div>
+        <div class="text">Ocupa te</div></div></div><div class="msg" style="animation-delay: 1s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1142174602819289188/2872386088efad73ae457178c67ea2d6.webp?size=128" alt="r4lu_" title="r4lu_">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">r4lu_</span>
+            <span class="time">🕐 06.01.2026, 14:24:14</span>
+        </div>
+        <div class="text">nu</div></div></div><div class="msg" style="animation-delay: 1.05s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1142174602819289188/2872386088efad73ae457178c67ea2d6.webp?size=128" alt="r4lu_" title="r4lu_">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">r4lu_</span>
+            <span class="time">🕐 06.01.2026, 14:24:19</span>
+        </div>
+        <div class="text">alt staff</div></div></div><div class="msg" style="animation-delay: 1.1s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1142174602819289188/2872386088efad73ae457178c67ea2d6.webp?size=128" alt="r4lu_" title="r4lu_">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">r4lu_</span>
+            <span class="time">🕐 06.01.2026, 14:24:26</span>
+        </div>
+        <div class="text">&lt;@1315311813583437847&gt;  ieși</div></div></div><div class="msg" style="animation-delay: 1.1500000000000001s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1142174602819289188/2872386088efad73ae457178c67ea2d6.webp?size=128" alt="r4lu_" title="r4lu_">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">r4lu_</span>
+            <span class="time">🕐 06.01.2026, 14:24:26</span>
+        </div>
+        <div class="text">ca</div></div></div><div class="msg" style="animation-delay: 1.2000000000000002s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1142174602819289188/2872386088efad73ae457178c67ea2d6.webp?size=128" alt="r4lu_" title="r4lu_">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">r4lu_</span>
+            <span class="time">🕐 06.01.2026, 14:24:31</span>
+        </div>
+        <div class="text">ești dușmanul meu</div></div></div><div class="msg" style="animation-delay: 1.25s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/614402987795939381/115c7c877729f2cb160b3ea54917e1c9.webp?size=128" alt="catalin_jr10" title="catalin_jr10">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">catalin_jr10</span>
+            <span class="time">🕐 06.01.2026, 14:24:35</span>
+        </div>
+        <div class="text">Asta e</div></div></div><div class="msg" style="animation-delay: 1.3s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/614402987795939381/115c7c877729f2cb160b3ea54917e1c9.webp?size=128" alt="catalin_jr10" title="catalin_jr10">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">catalin_jr10</span>
+            <span class="time">🕐 06.01.2026, 14:24:40</span>
+        </div>
+        <div class="text">El îți ia ticketu</div></div></div><div class="msg" style="animation-delay: 1.35s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1142174602819289188/2872386088efad73ae457178c67ea2d6.webp?size=128" alt="r4lu_" title="r4lu_">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">r4lu_</span>
+            <span class="time">🕐 06.01.2026, 14:24:44</span>
+        </div>
+        <div class="text">nu</div></div></div><div class="msg" style="animation-delay: 1.4000000000000001s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/614402987795939381/115c7c877729f2cb160b3ea54917e1c9.webp?size=128" alt="catalin_jr10" title="catalin_jr10">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">catalin_jr10</span>
+            <span class="time">🕐 06.01.2026, 14:24:44</span>
+        </div>
+        <div class="text">Eu am alta treaba de făcut</div></div></div><div class="msg" style="animation-delay: 1.4500000000000002s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/614402987795939381/115c7c877729f2cb160b3ea54917e1c9.webp?size=128" alt="catalin_jr10" title="catalin_jr10">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">catalin_jr10</span>
+            <span class="time">🕐 06.01.2026, 14:24:49</span>
+        </div>
+        <div class="text">Decât sa te ascult pe tine</div></div></div><div class="msg" style="animation-delay: 1.5s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1142174602819289188/2872386088efad73ae457178c67ea2d6.webp?size=128" alt="r4lu_" title="r4lu_">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">r4lu_</span>
+            <span class="time">🕐 06.01.2026, 14:24:49</span>
+        </div>
+        <div class="text">vreau pe altcnv</div></div></div><div class="msg" style="animation-delay: 1.55s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1315311813583437847/59b04884898bdd985eef738f059f0f7c.webp?size=128" alt="bossdenoss" title="bossdenoss">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">bossdenoss</span>
+            <span class="time">🕐 06.01.2026, 14:24:55</span>
+        </div>
+        <div class="text">cf gbr cu ce te pot ajuta</div></div></div><div class="msg" style="animation-delay: 1.6s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1142174602819289188/2872386088efad73ae457178c67ea2d6.webp?size=128" alt="r4lu_" title="r4lu_">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">r4lu_</span>
+            <span class="time">🕐 06.01.2026, 14:24:57</span>
+        </div>
+        <div class="text">BA</div></div></div><div class="msg" style="animation-delay: 1.6500000000000001s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1142174602819289188/2872386088efad73ae457178c67ea2d6.webp?size=128" alt="r4lu_" title="r4lu_">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">r4lu_</span>
+            <span class="time">🕐 06.01.2026, 14:25:04</span>
+        </div>
+        <div class="text">nu vb cu tine</div></div></div><div class="msg" style="animation-delay: 1.7000000000000002s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1142174602819289188/2872386088efad73ae457178c67ea2d6.webp?size=128" alt="r4lu_" title="r4lu_">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">r4lu_</span>
+            <span class="time">🕐 06.01.2026, 14:25:07</span>
+        </div>
+        <div class="text">ca ai raie</div></div></div><div class="msg" style="animation-delay: 1.75s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1455229229775065361/a_07b088393f9e5f661d5637dd10c60271.gif?size=128" alt="dr1p-new#5884" title="dr1p-new#5884">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">dr1p-new#5884</span>
+            <span class="time">🕐 06.01.2026, 14:25:09</span>
+        </div>
+        <div class="text"><em>Mesaj gol</em></div><div class="embed-note">📊 Embed inclus (1)</div></div></div><div class="msg" style="animation-delay: 1.8s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/614402987795939381/115c7c877729f2cb160b3ea54917e1c9.webp?size=128" alt="catalin_jr10" title="catalin_jr10">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">catalin_jr10</span>
+            <span class="time">🕐 06.01.2026, 14:25:13</span>
+        </div>
+        <div class="text">Atunci închide tk ul</div></div></div><div class="msg" style="animation-delay: 1.85s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1142174602819289188/2872386088efad73ae457178c67ea2d6.webp?size=128" alt="r4lu_" title="r4lu_">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">r4lu_</span>
+            <span class="time">🕐 06.01.2026, 14:25:13</span>
+        </div>
+        <div class="text">😂😂😂</div></div></div><div class="msg" style="animation-delay: 1.9000000000000001s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1142174602819289188/2872386088efad73ae457178c67ea2d6.webp?size=128" alt="r4lu_" title="r4lu_">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">r4lu_</span>
+            <span class="time">🕐 06.01.2026, 14:25:21</span>
+        </div>
+        <div class="text">vreau alt staff</div></div></div><div class="msg" style="animation-delay: 1.9500000000000002s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/614402987795939381/115c7c877729f2cb160b3ea54917e1c9.webp?size=128" alt="catalin_jr10" title="catalin_jr10">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">catalin_jr10</span>
+            <span class="time">🕐 06.01.2026, 14:25:23</span>
+        </div>
+        <div class="text">Jignire?</div></div></div><div class="msg" style="animation-delay: 2s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1315311813583437847/59b04884898bdd985eef738f059f0f7c.webp?size=128" alt="bossdenoss" title="bossdenoss">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">bossdenoss</span>
+            <span class="time">🕐 06.01.2026, 14:25:26</span>
+        </div>
+        <div class="text">vb frumos gabarit</div></div></div><div class="msg" style="animation-delay: 2.0500000000000003s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/614402987795939381/115c7c877729f2cb160b3ea54917e1c9.webp?size=128" alt="catalin_jr10" title="catalin_jr10">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">catalin_jr10</span>
+            <span class="time">🕐 06.01.2026, 14:25:28</span>
+        </div>
+        <div class="text">Fahh😂</div></div></div><div class="msg" style="animation-delay: 2.1s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1142174602819289188/2872386088efad73ae457178c67ea2d6.webp?size=128" alt="r4lu_" title="r4lu_">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">r4lu_</span>
+            <span class="time">🕐 06.01.2026, 14:25:30</span>
+        </div>
+        <div class="text">exp pe tk</div></div></div><div class="msg" style="animation-delay: 2.15s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1142174602819289188/2872386088efad73ae457178c67ea2d6.webp?size=128" alt="r4lu_" title="r4lu_">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">r4lu_</span>
+            <span class="time">🕐 06.01.2026, 14:25:33</span>
+        </div>
+        <div class="text">ban</div></div></div><div class="msg" style="animation-delay: 2.2s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1142174602819289188/2872386088efad73ae457178c67ea2d6.webp?size=128" alt="r4lu_" title="r4lu_">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">r4lu_</span>
+            <span class="time">🕐 06.01.2026, 14:25:35</span>
+        </div>
+        <div class="text">😂😂</div></div></div><div class="msg" style="animation-delay: 2.25s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/614402987795939381/115c7c877729f2cb160b3ea54917e1c9.webp?size=128" alt="catalin_jr10" title="catalin_jr10">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">catalin_jr10</span>
+            <span class="time">🕐 06.01.2026, 14:25:43</span>
+        </div>
+        <div class="text">Nu stiu despre ce vb</div></div></div><div class="msg" style="animation-delay: 2.3000000000000003s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1398256987468202105/f34e2dd7ac91a96b8928c7217069fa76.webp?size=128" alt="ionut._.ws" title="ionut._.ws">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">ionut._.ws</span>
+            <span class="time">🕐 06.01.2026, 14:25:47</span>
+        </div>
+        <div class="text">😂</div></div></div><div class="msg" style="animation-delay: 2.35s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/614402987795939381/115c7c877729f2cb160b3ea54917e1c9.webp?size=128" alt="catalin_jr10" title="catalin_jr10">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">catalin_jr10</span>
+            <span class="time">🕐 06.01.2026, 14:25:50</span>
+        </div>
+        <div class="text">Nu vad nimic</div></div></div><div class="msg" style="animation-delay: 2.4000000000000004s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/614402987795939381/115c7c877729f2cb160b3ea54917e1c9.webp?size=128" alt="catalin_jr10" title="catalin_jr10">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">catalin_jr10</span>
+            <span class="time">🕐 06.01.2026, 14:25:52</span>
+        </div>
+        <div class="text">😂😂</div></div></div><div class="msg" style="animation-delay: 2.45s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1398256987468202105/f34e2dd7ac91a96b8928c7217069fa76.webp?size=128" alt="ionut._.ws" title="ionut._.ws">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">ionut._.ws</span>
+            <span class="time">🕐 06.01.2026, 14:25:54</span>
+        </div>
+        <div class="text">&lt;a:pink:1275646499870474250&gt;</div></div></div><div class="msg" style="animation-delay: 2.5s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/614402987795939381/115c7c877729f2cb160b3ea54917e1c9.webp?size=128" alt="catalin_jr10" title="catalin_jr10">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">catalin_jr10</span>
+            <span class="time">🕐 06.01.2026, 14:26:00</span>
+        </div>
+        <div class="text">Dai singura expise</div></div></div><div class="msg" style="animation-delay: 2.5500000000000003s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/614402987795939381/115c7c877729f2cb160b3ea54917e1c9.webp?size=128" alt="catalin_jr10" title="catalin_jr10">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">catalin_jr10</span>
+            <span class="time">🕐 06.01.2026, 14:26:02</span>
+        </div>
+        <div class="text">Expose</div></div></div><div class="msg" style="animation-delay: 2.6s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/614402987795939381/115c7c877729f2cb160b3ea54917e1c9.webp?size=128" alt="catalin_jr10" title="catalin_jr10">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">catalin_jr10</span>
+            <span class="time">🕐 06.01.2026, 14:26:09</span>
+        </div>
+        <div class="text">😂</div></div></div><div class="msg" style="animation-delay: 2.6500000000000004s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1142174602819289188/2872386088efad73ae457178c67ea2d6.webp?size=128" alt="r4lu_" title="r4lu_">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">r4lu_</span>
+            <span class="time">🕐 06.01.2026, 14:26:10</span>
+        </div>
+        <div class="text">na vere</div></div></div><div class="msg" style="animation-delay: 2.7s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1142174602819289188/2872386088efad73ae457178c67ea2d6.webp?size=128" alt="r4lu_" title="r4lu_">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">r4lu_</span>
+            <span class="time">🕐 06.01.2026, 14:26:12</span>
+        </div>
+        <div class="text">😂😂</div></div></div><div class="msg" style="animation-delay: 2.75s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/614402987795939381/115c7c877729f2cb160b3ea54917e1c9.webp?size=128" alt="catalin_jr10" title="catalin_jr10">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">catalin_jr10</span>
+            <span class="time">🕐 06.01.2026, 14:26:12</span>
+        </div>
+        <div class="text">Hai gata</div></div></div><div class="msg" style="animation-delay: 2.8000000000000003s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1398256987468202105/f34e2dd7ac91a96b8928c7217069fa76.webp?size=128" alt="ionut._.ws" title="ionut._.ws">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">ionut._.ws</span>
+            <span class="time">🕐 06.01.2026, 14:26:15</span>
+        </div>
+        <div class="text">Ok staff warn</div></div></div><div class="msg" style="animation-delay: 2.85s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/614402987795939381/115c7c877729f2cb160b3ea54917e1c9.webp?size=128" alt="catalin_jr10" title="catalin_jr10">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">catalin_jr10</span>
+            <span class="time">🕐 06.01.2026, 14:26:16</span>
+        </div>
+        <div class="text">Ionut</div></div></div><div class="msg" style="animation-delay: 2.9000000000000004s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1398256987468202105/f34e2dd7ac91a96b8928c7217069fa76.webp?size=128" alt="ionut._.ws" title="ionut._.ws">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">ionut._.ws</span>
+            <span class="time">🕐 06.01.2026, 14:26:17</span>
+        </div>
+        <div class="text">&lt;@1315311813583437847&gt;</div></div></div><div class="msg" style="animation-delay: 2.95s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/614402987795939381/115c7c877729f2cb160b3ea54917e1c9.webp?size=128" alt="catalin_jr10" title="catalin_jr10">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">catalin_jr10</span>
+            <span class="time">🕐 06.01.2026, 14:26:18</span>
+        </div>
+        <div class="text">Ocupa te</div></div></div><div class="msg" style="animation-delay: 3s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1398256987468202105/f34e2dd7ac91a96b8928c7217069fa76.webp?size=128" alt="ionut._.ws" title="ionut._.ws">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">ionut._.ws</span>
+            <span class="time">🕐 06.01.2026, 14:26:22</span>
+        </div>
+        <div class="text">Ok</div></div></div><div class="msg" style="animation-delay: 3.0500000000000003s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1398256987468202105/f34e2dd7ac91a96b8928c7217069fa76.webp?size=128" alt="ionut._.ws" title="ionut._.ws">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">ionut._.ws</span>
+            <span class="time">🕐 06.01.2026, 14:26:25</span>
+        </div>
+        <div class="text">Ma ocup</div></div></div><div class="msg" style="animation-delay: 3.1s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1398256987468202105/f34e2dd7ac91a96b8928c7217069fa76.webp?size=128" alt="ionut._.ws" title="ionut._.ws">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">ionut._.ws</span>
+            <span class="time">🕐 06.01.2026, 14:26:27</span>
+        </div>
+        <div class="text">Sall</div></div></div><div class="msg" style="animation-delay: 3.1500000000000004s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1142174602819289188/2872386088efad73ae457178c67ea2d6.webp?size=128" alt="r4lu_" title="r4lu_">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">r4lu_</span>
+            <span class="time">🕐 06.01.2026, 14:26:28</span>
+        </div>
+        <div class="text">…</div></div></div><div class="msg" style="animation-delay: 3.2s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1315311813583437847/59b04884898bdd985eef738f059f0f7c.webp?size=128" alt="bossdenoss" title="bossdenoss">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">bossdenoss</span>
+            <span class="time">🕐 06.01.2026, 14:26:30</span>
+        </div>
+        <div class="text">offf</div></div></div><div class="msg" style="animation-delay: 3.25s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1398256987468202105/f34e2dd7ac91a96b8928c7217069fa76.webp?size=128" alt="ionut._.ws" title="ionut._.ws">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">ionut._.ws</span>
+            <span class="time">🕐 06.01.2026, 14:26:40</span>
+        </div>
+        <div class="text">Sall &lt;@1142174602819289188&gt;  cu ce te ajut ?</div></div></div><div class="msg" style="animation-delay: 3.3000000000000003s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1398256987468202105/f34e2dd7ac91a96b8928c7217069fa76.webp?size=128" alt="ionut._.ws" title="ionut._.ws">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">ionut._.ws</span>
+            <span class="time">🕐 06.01.2026, 14:26:42</span>
+        </div>
+        <div class="text">Zi</div></div></div><div class="msg" style="animation-delay: 3.35s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1142174602819289188/2872386088efad73ae457178c67ea2d6.webp?size=128" alt="r4lu_" title="r4lu_">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">r4lu_</span>
+            <span class="time">🕐 06.01.2026, 14:26:52</span>
+        </div>
+        <div class="text">nu mă grăbi</div></div></div><div class="msg" style="animation-delay: 3.4000000000000004s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1455229229775065361/a_07b088393f9e5f661d5637dd10c60271.gif?size=128" alt="dr1p-new#5884" title="dr1p-new#5884">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">dr1p-new#5884</span>
+            <span class="time">🕐 06.01.2026, 14:26:54</span>
+        </div>
+        <div class="text"><em>Mesaj gol</em></div><div class="embed-note">📊 Embed inclus (1)</div></div></div><div class="msg" style="animation-delay: 3.45s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1455229229775065361/a_07b088393f9e5f661d5637dd10c60271.gif?size=128" alt="dr1p-new#5884" title="dr1p-new#5884">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">dr1p-new#5884</span>
+            <span class="time">🕐 06.01.2026, 14:26:58</span>
+        </div>
+        <div class="text"><em>Mesaj gol</em></div><div class="embed-note">📊 Embed inclus (1)</div></div></div><div class="msg" style="animation-delay: 3.5s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1142174602819289188/2872386088efad73ae457178c67ea2d6.webp?size=128" alt="r4lu_" title="r4lu_">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">r4lu_</span>
+            <span class="time">🕐 06.01.2026, 14:27:05</span>
+        </div>
+        <div class="text">intră în log uri</div></div></div><div class="msg" style="animation-delay: 3.5500000000000003s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1398256987468202105/f34e2dd7ac91a96b8928c7217069fa76.webp?size=128" alt="ionut._.ws" title="ionut._.ws">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">ionut._.ws</span>
+            <span class="time">🕐 06.01.2026, 14:27:12</span>
+        </div>
+        <div class="text">Ok AKA 47</div></div></div><div class="msg" style="animation-delay: 3.6s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1142174602819289188/2872386088efad73ae457178c67ea2d6.webp?size=128" alt="r4lu_" title="r4lu_">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">r4lu_</span>
+            <span class="time">🕐 06.01.2026, 14:27:15</span>
+        </div>
+        <div class="text">vezi cine mi a schimbat numele</div></div></div><div class="msg" style="animation-delay: 3.6500000000000004s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/614402987795939381/115c7c877729f2cb160b3ea54917e1c9.webp?size=128" alt="catalin_jr10" title="catalin_jr10">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">catalin_jr10</span>
+            <span class="time">🕐 06.01.2026, 14:27:19</span>
+        </div>
+        <div class="text">Îți zice ce sa faci ba ionut în locul tau nu permiteam asa ceva</div></div></div><div class="msg" style="animation-delay: 3.7s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1398256987468202105/f34e2dd7ac91a96b8928c7217069fa76.webp?size=128" alt="ionut._.ws" title="ionut._.ws">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">ionut._.ws</span>
+            <span class="time">🕐 06.01.2026, 14:27:19</span>
+        </div>
+        <div class="text">Ok</div></div></div><div class="msg" style="animation-delay: 3.75s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1398256987468202105/f34e2dd7ac91a96b8928c7217069fa76.webp?size=128" alt="ionut._.ws" title="ionut._.ws">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">ionut._.ws</span>
+            <span class="time">🕐 06.01.2026, 14:27:27</span>
+        </div>
+        <div class="text">Acum vad</div></div></div><div class="msg" style="animation-delay: 3.8000000000000003s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1142174602819289188/2872386088efad73ae457178c67ea2d6.webp?size=128" alt="r4lu_" title="r4lu_">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">r4lu_</span>
+            <span class="time">🕐 06.01.2026, 14:27:31</span>
+        </div>
+        <div class="text">😂😂😂</div></div></div><div class="msg" style="animation-delay: 3.85s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/614402987795939381/115c7c877729f2cb160b3ea54917e1c9.webp?size=128" alt="catalin_jr10" title="catalin_jr10">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">catalin_jr10</span>
+            <span class="time">🕐 06.01.2026, 14:27:37</span>
+        </div>
+        <div class="text">Ai ban</div></div></div><div class="msg" style="animation-delay: 3.9000000000000004s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1398256987468202105/f34e2dd7ac91a96b8928c7217069fa76.webp?size=128" alt="ionut._.ws" title="ionut._.ws">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">ionut._.ws</span>
+            <span class="time">🕐 06.01.2026, 14:27:42</span>
+        </div>
+        <div class="text">&lt;@966637812487180298&gt;</div></div></div><div class="msg" style="animation-delay: 3.95s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/614402987795939381/115c7c877729f2cb160b3ea54917e1c9.webp?size=128" alt="catalin_jr10" title="catalin_jr10">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">catalin_jr10</span>
+            <span class="time">🕐 06.01.2026, 14:27:49</span>
+        </div>
+        <div class="text">😂</div></div></div><div class="msg" style="animation-delay: 4s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1142174602819289188/2872386088efad73ae457178c67ea2d6.webp?size=128" alt="r4lu_" title="r4lu_">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">r4lu_</span>
+            <span class="time">🕐 06.01.2026, 14:27:52</span>
+        </div>
+        <div class="text">oh nu</div></div></div><div class="msg" style="animation-delay: 4.05s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1398256987468202105/f34e2dd7ac91a96b8928c7217069fa76.webp?size=128" alt="ionut._.ws" title="ionut._.ws">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">ionut._.ws</span>
+            <span class="time">🕐 06.01.2026, 14:27:55</span>
+        </div>
+        <div class="text">El a schimbat numele</div></div></div><div class="msg" style="animation-delay: 4.1000000000000005s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1142174602819289188/2872386088efad73ae457178c67ea2d6.webp?size=128" alt="r4lu_" title="r4lu_">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">r4lu_</span>
+            <span class="time">🕐 06.01.2026, 14:27:59</span>
+        </div>
+        <div class="text">bnu</div></div></div><div class="msg" style="animation-delay: 4.15s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1142174602819289188/2872386088efad73ae457178c67ea2d6.webp?size=128" alt="r4lu_" title="r4lu_">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">r4lu_</span>
+            <span class="time">🕐 06.01.2026, 14:28:03</span>
+        </div>
+        <div class="text">ca el se joacă</div></div></div><div class="msg" style="animation-delay: 4.2s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1398256987468202105/f34e2dd7ac91a96b8928c7217069fa76.webp?size=128" alt="ionut._.ws" title="ionut._.ws">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">ionut._.ws</span>
+            <span class="time">🕐 06.01.2026, 14:28:14</span>
+        </div>
+        <div class="text">Ba da el</div></div></div><div class="msg" style="animation-delay: 4.25s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1142174602819289188/2872386088efad73ae457178c67ea2d6.webp?size=128" alt="r4lu_" title="r4lu_">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">r4lu_</span>
+            <span class="time">🕐 06.01.2026, 14:28:20</span>
+        </div>
+        <div class="text">bnu vreau proof</div></div></div><div class="msg" style="animation-delay: 4.3s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/966637812487180298/449b933b1d8c0ae191b6b6ca6c50b21b.webp?size=128" alt="_pussydestroy3r" title="_pussydestroy3r">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">_pussydestroy3r</span>
+            <span class="time">🕐 06.01.2026, 14:28:22</span>
+        </div>
+        <div class="text">m-am jucat cu porecla ta gbr</div></div></div><div class="msg" style="animation-delay: 4.3500000000000005s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1315311813583437847/59b04884898bdd985eef738f059f0f7c.webp?size=128" alt="bossdenoss" title="bossdenoss">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">bossdenoss</span>
+            <span class="time">🕐 06.01.2026, 14:28:24</span>
+        </div>
+        <div class="text">ahhh mamiiiiiiii</div></div></div><div class="msg" style="animation-delay: 4.4s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1398256987468202105/f34e2dd7ac91a96b8928c7217069fa76.webp?size=128" alt="ionut._.ws" title="ionut._.ws">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">ionut._.ws</span>
+            <span class="time">🕐 06.01.2026, 14:28:31</span>
+        </div>
+        <div class="text">Aveți grija</div></div></div><div class="msg" style="animation-delay: 4.45s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1398256987468202105/f34e2dd7ac91a96b8928c7217069fa76.webp?size=128" alt="ionut._.ws" title="ionut._.ws">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">ionut._.ws</span>
+            <span class="time">🕐 06.01.2026, 14:28:36</span>
+        </div>
+        <div class="text"><em>Mesaj gol</em></div><div class="attach"><a href="https://cdn.discordapp.com/attachments/1458103544233328793/1458104974750908699/6c76ea0048f5f6836878eb8931893a66.png?ex=695e6d94&is=695d1c14&hm=5c19c31e656e32b06bf013867e241f34fc2cc76b6a7ee6ca56a57602ce1669b4&" target="_blank">📎 6c76ea0048f5f6836878eb8931893a66.png</a></div></div></div><div class="msg" style="animation-delay: 4.5s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1142174602819289188/2872386088efad73ae457178c67ea2d6.webp?size=128" alt="r4lu_" title="r4lu_">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">r4lu_</span>
+            <span class="time">🕐 06.01.2026, 14:28:39</span>
+        </div>
+        <div class="text"><em>Mesaj gol</em></div><div class="attach"><a href="https://cdn.discordapp.com/attachments/1458103544233328793/1458104988642443345/IMG_9584.png?ex=695e6d97&is=695d1c17&hm=e209b4065a9de86c219037e59a23d519534fcfa3c3d57c7661c908ed0058e26a&" target="_blank">📎 IMG_9584.png</a></div></div></div><div class="msg" style="animation-delay: 4.55s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1443431256305041561/e094636bdf920323987429cda3af8513.webp?size=128" alt="packer1v90" title="packer1v90">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">packer1v90</span>
+            <span class="time">🕐 06.01.2026, 14:28:42</span>
+        </div>
+        <div class="text">Bro</div></div></div><div class="msg" style="animation-delay: 4.6000000000000005s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1398256987468202105/f34e2dd7ac91a96b8928c7217069fa76.webp?size=128" alt="ionut._.ws" title="ionut._.ws">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">ionut._.ws</span>
+            <span class="time">🕐 06.01.2026, 14:28:46</span>
+        </div>
+        <div class="text">Ca dacă vine asta nu e bn</div></div></div><div class="msg" style="animation-delay: 4.65s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1398256987468202105/f34e2dd7ac91a96b8928c7217069fa76.webp?size=128" alt="ionut._.ws" title="ionut._.ws">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">ionut._.ws</span>
+            <span class="time">🕐 06.01.2026, 14:28:57</span>
+        </div>
+        <div class="text">Sall nu mai fa free chat</div></div></div><div class="msg" style="animation-delay: 4.7s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1142174602819289188/2872386088efad73ae457178c67ea2d6.webp?size=128" alt="r4lu_" title="r4lu_">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">r4lu_</span>
+            <span class="time">🕐 06.01.2026, 14:29:05</span>
+        </div>
+        <div class="text">…</div></div></div><div class="msg" style="animation-delay: 4.75s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1443431256305041561/e094636bdf920323987429cda3af8513.webp?size=128" alt="packer1v90" title="packer1v90">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">packer1v90</span>
+            <span class="time">🕐 06.01.2026, 14:29:12</span>
+        </div>
+        <div class="text">..</div></div></div><div class="msg" style="animation-delay: 4.800000000000001s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1398256987468202105/f34e2dd7ac91a96b8928c7217069fa76.webp?size=128" alt="ionut._.ws" title="ionut._.ws">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">ionut._.ws</span>
+            <span class="time">🕐 06.01.2026, 14:29:13</span>
+        </div>
+        <div class="text">Te mai ajut cu ceva ?</div></div></div><div class="msg" style="animation-delay: 4.8500000000000005s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1315311813583437847/59b04884898bdd985eef738f059f0f7c.webp?size=128" alt="bossdenoss" title="bossdenoss">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">bossdenoss</span>
+            <span class="time">🕐 06.01.2026, 14:29:14</span>
+        </div>
+        <div class="text">cf</div></div></div><div class="msg" style="animation-delay: 4.9s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1142174602819289188/2872386088efad73ae457178c67ea2d6.webp?size=128" alt="r4lu_" title="r4lu_">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">r4lu_</span>
+            <span class="time">🕐 06.01.2026, 14:29:15</span>
+        </div>
+        <div class="text">BA NENE</div></div></div><div class="msg" style="animation-delay: 4.95s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1142174602819289188/2872386088efad73ae457178c67ea2d6.webp?size=128" alt="r4lu_" title="r4lu_">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">r4lu_</span>
+            <span class="time">🕐 06.01.2026, 14:29:20</span>
+        </div>
+        <div class="text">BINE TU ?</div></div></div><div class="msg" style="animation-delay: 5s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/614402987795939381/115c7c877729f2cb160b3ea54917e1c9.webp?size=128" alt="catalin_jr10" title="catalin_jr10">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">catalin_jr10</span>
+            <span class="time">🕐 06.01.2026, 14:29:46</span>
+        </div>
+        <div class="text">Fahh
+..</div></div></div><div class="msg" style="animation-delay: 5.050000000000001s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1142174602819289188/2872386088efad73ae457178c67ea2d6.webp?size=128" alt="r4lu_" title="r4lu_">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">r4lu_</span>
+            <span class="time">🕐 06.01.2026, 14:29:59</span>
+        </div>
+        <div class="text"># IONUȚ ASTA NU VREA SA IMI ARATE CINE MI A SCHIMBAT NUMELE</div></div></div><div class="msg" style="animation-delay: 5.1000000000000005s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/614402987795939381/115c7c877729f2cb160b3ea54917e1c9.webp?size=128" alt="catalin_jr10" title="catalin_jr10">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">catalin_jr10</span>
+            <span class="time">🕐 06.01.2026, 14:30:06</span>
+        </div>
+        <div class="text">Care mai face troll are sw</div></div></div><div class="msg" style="animation-delay: 5.15s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1142174602819289188/2872386088efad73ae457178c67ea2d6.webp?size=128" alt="r4lu_" title="r4lu_">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">r4lu_</span>
+            <span class="time">🕐 06.01.2026, 14:30:07</span>
+        </div>
+        <div class="text"># stop free chat</div></div></div><div class="msg" style="animation-delay: 5.2s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1398256987468202105/f34e2dd7ac91a96b8928c7217069fa76.webp?size=128" alt="ionut._.ws" title="ionut._.ws">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">ionut._.ws</span>
+            <span class="time">🕐 06.01.2026, 14:30:24</span>
+        </div>
+        <div class="text">Ok</div></div></div><div class="msg" style="animation-delay: 5.25s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1398256987468202105/f34e2dd7ac91a96b8928c7217069fa76.webp?size=128" alt="ionut._.ws" title="ionut._.ws">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">ionut._.ws</span>
+            <span class="time">🕐 06.01.2026, 14:30:26</span>
+        </div>
+        <div class="text">Gata</div></div></div><div class="msg" style="animation-delay: 5.300000000000001s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1142174602819289188/2872386088efad73ae457178c67ea2d6.webp?size=128" alt="r4lu_" title="r4lu_">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">r4lu_</span>
+            <span class="time">🕐 06.01.2026, 14:31:18</span>
+        </div>
+        <div class="text">&lt;@614402987795939381&gt;  eu știam ca dacă ești pe vc  n ai voie sa te ocupi de tk</div></div></div><div class="msg" style="animation-delay: 5.3500000000000005s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1398256987468202105/f34e2dd7ac91a96b8928c7217069fa76.webp?size=128" alt="ionut._.ws" title="ionut._.ws">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">ionut._.ws</span>
+            <span class="time">🕐 06.01.2026, 14:31:32</span>
+        </div>
+        <div class="text">Sunt afk</div></div></div><div class="msg" style="animation-delay: 5.4s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1398256987468202105/f34e2dd7ac91a96b8928c7217069fa76.webp?size=128" alt="ionut._.ws" title="ionut._.ws">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">ionut._.ws</span>
+            <span class="time">🕐 06.01.2026, 14:31:34</span>
+        </div>
+        <div class="text">Gen</div></div></div><div class="msg" style="animation-delay: 5.45s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1142174602819289188/2872386088efad73ae457178c67ea2d6.webp?size=128" alt="r4lu_" title="r4lu_">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">r4lu_</span>
+            <span class="time">🕐 06.01.2026, 14:31:36</span>
+        </div>
+        <div class="text">minți</div></div></div><div class="msg" style="animation-delay: 5.5s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1142174602819289188/2872386088efad73ae457178c67ea2d6.webp?size=128" alt="r4lu_" title="r4lu_">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">r4lu_</span>
+            <span class="time">🕐 06.01.2026, 14:31:43</span>
+        </div>
+        <div class="text">ai vb pana acum</div></div></div><div class="msg" style="animation-delay: 5.550000000000001s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1398256987468202105/f34e2dd7ac91a96b8928c7217069fa76.webp?size=128" alt="ionut._.ws" title="ionut._.ws">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">ionut._.ws</span>
+            <span class="time">🕐 06.01.2026, 14:31:51</span>
+        </div>
+        <div class="text">Ai dovada ?</div></div></div><div class="msg" style="animation-delay: 5.6000000000000005s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1142174602819289188/2872386088efad73ae457178c67ea2d6.webp?size=128" alt="r4lu_" title="r4lu_">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">r4lu_</span>
+            <span class="time">🕐 06.01.2026, 14:31:55</span>
+        </div>
+        <div class="text">da</div></div></div><div class="msg" style="animation-delay: 5.65s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1398256987468202105/f34e2dd7ac91a96b8928c7217069fa76.webp?size=128" alt="ionut._.ws" title="ionut._.ws">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">ionut._.ws</span>
+            <span class="time">🕐 06.01.2026, 14:32:04</span>
+        </div>
+        <div class="text">Pune aici filmare</div></div></div><div class="msg" style="animation-delay: 5.7s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1142174602819289188/2872386088efad73ae457178c67ea2d6.webp?size=128" alt="r4lu_" title="r4lu_">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">r4lu_</span>
+            <span class="time">🕐 06.01.2026, 14:32:09</span>
+        </div>
+        <div class="text">…</div></div></div><div class="msg" style="animation-delay: 5.75s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/614402987795939381/115c7c877729f2cb160b3ea54917e1c9.webp?size=128" alt="catalin_jr10" title="catalin_jr10">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">catalin_jr10</span>
+            <span class="time">🕐 06.01.2026, 14:32:17</span>
+        </div>
+        <div class="text">Are voie</div></div></div><div class="msg" style="animation-delay: 5.800000000000001s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1142174602819289188/2872386088efad73ae457178c67ea2d6.webp?size=128" alt="r4lu_" title="r4lu_">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">r4lu_</span>
+            <span class="time">🕐 06.01.2026, 14:32:24</span>
+        </div>
+        <div class="text">a da ?</div></div></div><div class="msg" style="animation-delay: 5.8500000000000005s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1142174602819289188/2872386088efad73ae457178c67ea2d6.webp?size=128" alt="r4lu_" title="r4lu_">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">r4lu_</span>
+            <span class="time">🕐 06.01.2026, 14:32:26</span>
+        </div>
+        <div class="text">bine</div></div></div><div class="msg" style="animation-delay: 5.9s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1398256987468202105/f34e2dd7ac91a96b8928c7217069fa76.webp?size=128" alt="ionut._.ws" title="ionut._.ws">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">ionut._.ws</span>
+            <span class="time">🕐 06.01.2026, 14:32:32</span>
+        </div>
+        <div class="text">Bine</div></div></div><div class="msg" style="animation-delay: 5.95s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1142174602819289188/2872386088efad73ae457178c67ea2d6.webp?size=128" alt="r4lu_" title="r4lu_">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">r4lu_</span>
+            <span class="time">🕐 06.01.2026, 14:32:38</span>
+        </div>
+        <div class="text">TRIMITE</div></div></div><div class="msg" style="animation-delay: 6s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1142174602819289188/2872386088efad73ae457178c67ea2d6.webp?size=128" alt="r4lu_" title="r4lu_">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">r4lu_</span>
+            <span class="time">🕐 06.01.2026, 14:32:41</span>
+        </div>
+        <div class="text">POZA</div></div></div><div class="msg" style="animation-delay: 6.050000000000001s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1142174602819289188/2872386088efad73ae457178c67ea2d6.webp?size=128" alt="r4lu_" title="r4lu_">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">r4lu_</span>
+            <span class="time">🕐 06.01.2026, 14:32:42</span>
+        </div>
+        <div class="text">CU</div></div></div><div class="msg" style="animation-delay: 6.1000000000000005s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1142174602819289188/2872386088efad73ae457178c67ea2d6.webp?size=128" alt="r4lu_" title="r4lu_">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">r4lu_</span>
+            <span class="time">🕐 06.01.2026, 14:32:43</span>
+        </div>
+        <div class="text">CINE</div></div></div><div class="msg" style="animation-delay: 6.15s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1142174602819289188/2872386088efad73ae457178c67ea2d6.webp?size=128" alt="r4lu_" title="r4lu_">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">r4lu_</span>
+            <span class="time">🕐 06.01.2026, 14:32:47</span>
+        </div>
+        <div class="text">MI-A SCHIMBAT NUMELE</div></div></div><div class="msg" style="animation-delay: 6.2s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1398256987468202105/f34e2dd7ac91a96b8928c7217069fa76.webp?size=128" alt="ionut._.ws" title="ionut._.ws">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">ionut._.ws</span>
+            <span class="time">🕐 06.01.2026, 14:32:47</span>
+        </div>
+        <div class="text">&lt;a:emoji949440579891241000:1440059095833903114&gt;</div></div></div><div class="msg" style="animation-delay: 6.25s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1398256987468202105/f34e2dd7ac91a96b8928c7217069fa76.webp?size=128" alt="ionut._.ws" title="ionut._.ws">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">ionut._.ws</span>
+            <span class="time">🕐 06.01.2026, 14:32:51</span>
+        </div>
+        <div class="text">&lt;a:emoji949812448922329139:1440059104264585267&gt;</div></div></div><div class="msg" style="animation-delay: 6.300000000000001s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1142174602819289188/2872386088efad73ae457178c67ea2d6.webp?size=128" alt="r4lu_" title="r4lu_">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">r4lu_</span>
+            <span class="time">🕐 06.01.2026, 14:33:01</span>
+        </div>
+        <div class="text">…</div></div></div><div class="msg" style="animation-delay: 6.3500000000000005s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1142174602819289188/2872386088efad73ae457178c67ea2d6.webp?size=128" alt="r4lu_" title="r4lu_">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">r4lu_</span>
+            <span class="time">🕐 06.01.2026, 14:33:06</span>
+        </div>
+        <div class="text">mă iei la misto ?</div></div></div><div class="msg" style="animation-delay: 6.4s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1398256987468202105/f34e2dd7ac91a96b8928c7217069fa76.webp?size=128" alt="ionut._.ws" title="ionut._.ws">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">ionut._.ws</span>
+            <span class="time">🕐 06.01.2026, 14:33:30</span>
+        </div>
+        <div class="text">Nu</div></div></div><div class="msg" style="animation-delay: 6.45s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1398256987468202105/f34e2dd7ac91a96b8928c7217069fa76.webp?size=128" alt="ionut._.ws" title="ionut._.ws">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">ionut._.ws</span>
+            <span class="time">🕐 06.01.2026, 14:33:36</span>
+        </div>
+        <div class="text">&lt;a:emoji1435745851883524180:1440058712424185888&gt;</div></div></div><div class="msg" style="animation-delay: 6.5s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1398256987468202105/f34e2dd7ac91a96b8928c7217069fa76.webp?size=128" alt="ionut._.ws" title="ionut._.ws">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">ionut._.ws</span>
+            <span class="time">🕐 06.01.2026, 14:33:52</span>
+        </div>
+        <div class="text">&lt;@614402987795939381&gt;</div></div></div><div class="msg" style="animation-delay: 6.550000000000001s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1455229229775065361/a_07b088393f9e5f661d5637dd10c60271.gif?size=128" alt="dr1p-new#5884" title="dr1p-new#5884">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">dr1p-new#5884</span>
+            <span class="time">🕐 06.01.2026, 14:34:13</span>
+        </div>
+        <div class="text"><em>Mesaj gol</em></div><div class="embed-note">📊 Embed inclus (1)</div></div></div><div class="msg" style="animation-delay: 6.6000000000000005s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1398256987468202105/f34e2dd7ac91a96b8928c7217069fa76.webp?size=128" alt="ionut._.ws" title="ionut._.ws">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">ionut._.ws</span>
+            <span class="time">🕐 06.01.2026, 14:34:24</span>
+        </div>
+        <div class="text">Ok gata</div></div></div><div class="msg" style="animation-delay: 6.65s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1455229229775065361/a_07b088393f9e5f661d5637dd10c60271.gif?size=128" alt="dr1p-new#5884" title="dr1p-new#5884">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">dr1p-new#5884</span>
+            <span class="time">🕐 06.01.2026, 14:34:41</span>
+        </div>
+        <div class="text"><em>Mesaj gol</em></div><div class="embed-note">📊 Embed inclus (1)</div></div></div><div class="msg" style="animation-delay: 6.7s">
+    <div class="avatar-wrapper">
+        <img class="avatar" src="https://cdn.discordapp.com/avatars/1455229229775065361/a_07b088393f9e5f661d5637dd10c60271.gif?size=128" alt="dr1p-new#5884" title="dr1p-new#5884">
+        <div class="avatar-badge"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="msg-header">
+            <span class="author">dr1p-new#5884</span>
+            <span class="time">🕐 06.01.2026, 14:34:55</span>
+        </div>
+        <div class="text"><em>Mesaj gol</em></div><div class="embed-note">📊 Embed inclus (1)</div></div></div>
+    </div>
+</main>
+
+<footer>
+    <p>Transcript generat automat de DR1P Bot • Sistem de Tickete</p>
+</footer>
+
+</body>
+</html>
